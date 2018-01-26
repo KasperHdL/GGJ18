@@ -19,8 +19,8 @@ public class Character : MonoBehaviour {
 
     public Vector2 steering;
 
-    GamePadState state;
-    GamePadState prevState;
+    public GamePadState state;
+    public GamePadState prevState;
 
     [HideInInspector] public Rigidbody body;
 	void Start () {
