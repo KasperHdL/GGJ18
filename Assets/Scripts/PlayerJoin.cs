@@ -11,6 +11,8 @@ public class PlayerJoin : MonoBehaviour {
     private GamePadState[] state;
     private GamePadState[] prevStates;
 
+    public Character[] characters;
+
     // Use this for initialization
     void Start () {
         playersJoined = new List<int>();
@@ -18,6 +20,11 @@ public class PlayerJoin : MonoBehaviour {
         playersReady = new bool[4];
         state = new GamePadState[4];
         prevStates = new GamePadState[4];
+
+        for(int i = 0; i < characters.Length;i++)
+        {
+            characters[i].enabled = false;
+        }
 	}
 
     bool firstFrame = true;
@@ -74,7 +81,26 @@ public class PlayerJoin : MonoBehaviour {
     {
         for(int i = 0; i < playersJoined.Count;i++)
         {
-            Debug.Log("PLAYER " + i + " IS CONTROLLER" + playersJoined[i]);
+            Debug.Log("PLAYER " + i + " IS CONTROLLER " + playersJoined[i]);
+            characters[i].playerIndex = (PlayerIndex)playersJoined[i];
+        }
+
+        gameObject.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        for (int i = 0; i < playersJoined.Count; i++)
+        {
+            characters[i].enabled = true;
+        }
+    }
+
+    void OnEnable()
+    {
+        for (int i = 0; i < playersJoined.Count; i++)
+        {
+            characters[i].enabled = false;
         }
     }
 }
