@@ -1681,7 +1681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2c1f2171f7c46c0b3dc9df1ad2a108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roverType: 1
   steering: {x: 0, y: 0}
   use_keyboard: 0
   playerIndex: 0
