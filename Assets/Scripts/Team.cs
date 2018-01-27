@@ -43,11 +43,11 @@ public class Team : MonoBehaviour {
 		}
 
 		RaycastHit hit;
-		if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit))
+		if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
 		{
 			if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
 			{
-				//FAIL();
+				FAIL();
 			}
 		}
 	}
