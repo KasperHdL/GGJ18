@@ -9,18 +9,21 @@ public class Beam : MonoBehaviour {
 	public GameObject player2;
 	public float minDist;
 	public float maxDist;
+	public bool disrupted;
+	
 	private Color currentColor;
-	private bool disrupted;
 	// Use this for initialization
 	private LineRenderer line;
 	public Material lineMaterial;
-	void Start () {
+	
+	void Start () 
+	{
 		line = GetComponent<LineRenderer>();
 		line.positionCount = 2;
 		line.GetComponent<Renderer>().sharedMaterial = lineMaterial;
 		currentColor = Color.white;
-		disrupted = false;
-		enable();
+		disrupted = true;
+		distrupt();
 	}
 	
 	// Update is called once per frame
@@ -29,15 +32,20 @@ public class Beam : MonoBehaviour {
 	public float distruptionDelay = 2f;
 	public Color distruptColor;
 	public Color enabledColor;
+	
+	private float t = 0;
+
 	void Update () {
 		if(!disrupted){
 		RaycastHit hit;
 			if(Physics.Linecast(player1.transform.position,player2.transform.position,out hit)){
 				if(!hit.transform.tag.Equals("Player")||hit.distance<minDist||hit.distance>maxDist){
-					distruptTimer+=Time.deltaTime;
-					Debug.Log(Map(distruptTimer,0f,0f,distruptionDelay,1f));
-					currentColor = Color.Lerp(currentColor,distruptColor,Map(distruptTimer,0f,0f,distruptionDelay,1f));
-					if(distruptTimer>distruptionDelay){
+					distruptTimer += Time.deltaTime;
+					
+					t = distruptTimer / distruptionDelay;
+
+					currentColor = Color.Lerp(currentColor, distruptColor, t);
+					if(distruptTimer > distruptionDelay){
 						distrupt();
 					}
 				}

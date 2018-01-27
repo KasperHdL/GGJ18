@@ -21,6 +21,11 @@ public class Character : MonoBehaviour {
     public GamePadState state;
     public GamePadState prevState;
 
+    [Range(0.1f, 1.0f)]
+    public float vibrationStrength;
+    [Range(0.1f, 0.5f)]
+    public float vibrationLength = 0.5f;
+
 
     [Header("Character Settings")]
     public float moveForce;
@@ -52,6 +57,32 @@ public class Character : MonoBehaviour {
 
         Vector3 move = Vector3.right * steering.x + Vector3.forward * steering.y;
         body.AddForce(move * Time.deltaTime * moveForce);
-		
 	}
+
+    public void Vibrate(InputValues vibrationType)
+    {
+        switch(vibrationType)
+        {
+            case InputValues.Both:
+                GamePad.SetVibration(playerIndex, vibrationStrength, vibrationStrength);
+            break;
+
+            case InputValues.Left:
+                GamePad.SetVibration(playerIndex, vibrationStrength, 0.0f);
+            break;
+
+            case InputValues.Right:
+                GamePad.SetVibration(playerIndex, 0.0f, vibrationStrength);
+            break;
+        }
+
+        StartCoroutine(StopVibrationAfterTimer());
+    }
+
+    public IEnumerator StopVibrationAfterTimer()
+    {
+        yield return new WaitForSeconds(vibrationLength);
+
+        GamePad.SetVibration(playerIndex, 0.0f, 0.0f);
+    }
 }
