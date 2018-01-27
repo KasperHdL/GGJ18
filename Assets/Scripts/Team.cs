@@ -30,11 +30,15 @@ public class Team : MonoBehaviour {
 		GameEventHandler.Subscribe(GameEvent.Rumble, SendVibration);
 		GameEventHandler.Subscribe(GameEvent.PatternSuccess, PatternCompletion);
 		GameEventHandler.Subscribe(GameEvent.PatternFailure, PatternFailure);
+		GameEventHandler.Subscribe(GameEvent.NoteSuccess, NoteSuccess);
 
 		pattern.teamID = teamID;
 		pattern.GenerateNewPattern();
 		
 		pattern.Initialize();
+
+		beam.player1 = receiver.gameObject;
+		beam.player2 = sender.gameObject;
 
 		PlayerSwap(50);
 	}
@@ -57,6 +61,17 @@ public class Team : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void NoteSuccess(GameEventArgs argument)
+	{
+		PatternArgs patternArgument = (PatternArgs)argument;
+		if (patternArgument.teamID != teamID)
+		{
+			return;
+		}
+
+		sender.correctNoteFeedback.Play();
 	}
 
 	public void PatternFailure(GameEventArgs argument)
@@ -143,7 +158,7 @@ public class Team : MonoBehaviour {
 		}
 	}
 
-	public void SendInputToPatten(InputValues inputValue)
+	public void SendInputToPattern(InputValues inputValue)
 	{
 		if (inputValue == InputValues.Count)
 		{
@@ -210,7 +225,7 @@ public class Team : MonoBehaviour {
 				inputValues = InputValues.Right;
 			}
 
-			SendInputToPatten(inputValues);
+			SendInputToPattern(inputValues);
 			readyForInput = false;
 
 			leftSet = false;

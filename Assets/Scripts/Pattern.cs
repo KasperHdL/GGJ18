@@ -75,6 +75,11 @@ public class Pattern : MonoBehaviour {
 
 		correctInput = currentPattern[currentPositionInPattern] == input;
 		
+		if (correctInput)
+		{
+			GameEventHandler.TriggerEvent(GameEvent.NoteSuccess, patternArgument);
+		}
+
 		waitingForValue = false;
 	}
 
