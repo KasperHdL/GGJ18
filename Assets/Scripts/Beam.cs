@@ -9,48 +9,42 @@ public class Beam : MonoBehaviour {
 	public GameObject player2;
 	public float minDist;
 	public float maxDist;
+	public float middleDist;
 	public bool disrupted;
 	
 	private Color currentColor;
-	// Use this for initialization
 	private LineRenderer line;
 	public Material lineMaterial;
+	float dist;
 	
 	void Start () 
 	{
+
 		line = GetComponent<LineRenderer>();
 		line.positionCount = 2;
 		line.GetComponent<Renderer>().sharedMaterial = lineMaterial;
-		currentColor = Color.white;
+		currentColor = Color.black;
 		disrupted = true;
 		distrupt();
+		middleDist = maxDist + (minDist - maxDist) / 2;
 	}
-	
-	// Update is called once per frame
 
 	private float distruptTimer = 0f;
-	public float distruptionDelay = 2f;
 	public Color distruptColor;
 	public Color enabledColor;
-	
-	private float t = 0;
 
 	void Update () {
-		/*if(!disrupted){
-		RaycastHit hit;
-			if(Physics.Linecast(player1.transform.position,player2.transform.position,out hit)){
-				if(!hit.transform.tag.Equals("Player")||hit.distance<minDist||hit.distance>maxDist){
-					distruptTimer += Time.deltaTime;
-					
-					t = distruptTimer / distruptionDelay;
+		dist = Vector3.Distance(player1.transform.position,player2.transform.position);
+		if(dist<middleDist){
+			//closests to mindist
+			currentColor = Color.Lerp(enabledColor,distruptColor,minDist/dist);
+		}else if(dist>middleDist){
+			//closests to max dist
+			currentColor = Color.Lerp(enabledColor,distruptColor,dist/maxDist);
+		}else{
+			currentColor = enabledColor;
+		}
 
-					currentColor = Color.Lerp(currentColor, distruptColor, t);
-					if(distruptTimer > distruptionDelay){
-						distrupt();
-					}
-				}
-			}
-		}*/
 		Debug.DrawLine(player1.transform.position,player2.transform.position,currentColor,Time.deltaTime);
 		line.SetPosition(0,player1.transform.position);
 		line.SetPosition(1,player2.transform.position);
@@ -69,7 +63,6 @@ public class Beam : MonoBehaviour {
 	public void distrupt(){
 		disrupted = true;
 		currentColor = distruptColor;
-		//lineMaterial.color = currentColor;
 		distruptTimer = 0f;
 		line.enabled = false;
 	}
