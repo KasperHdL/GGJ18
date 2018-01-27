@@ -353,8 +353,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1547578284371712}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6.53}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4431622780377526}
@@ -1117,6 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2c1f2171f7c46c0b3dc9df1ad2a108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roverType: 1
   steering: {x: 0, y: 0}
   use_keyboard: 0
   playerIndex: 0
@@ -1129,11 +1130,7 @@ MonoBehaviour:
   - {fileID: 4621884394285690}
   - {fileID: 4218371111588672}
   - {fileID: 4519627092246322}
-  visualWheels:
-  - {fileID: 4176122129048472}
-  - {fileID: 4150193216192366}
-  - {fileID: 4445055848881204}
-  - {fileID: 4106728303965194}
+  visuals: []
   body: {fileID: 0}
   wheelForce:
   - 0

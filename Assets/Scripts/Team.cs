@@ -34,6 +34,8 @@ public class Team : MonoBehaviour {
 		pattern.teamID = teamID;
 		pattern.GenerateNewPattern();
 		
+		pattern.Initialize();
+
 		PlayerSwap(50);
 	}
 
@@ -44,6 +46,16 @@ public class Team : MonoBehaviour {
 		if (beam.disrupted)
 		{
 			CheckPatternStart();
+
+		}
+		else
+		{
+			RaycastHit hit;
+			if(Physics.Linecast(receiver.transform.position,sender.transform.position,out hit)){
+				if(!hit.transform.tag.Equals("Team"+teamID)||hit.distance<beam.minDist||hit.distance>beam.maxDist){
+					FAIL();
+				}
+			}
 		}
 	}
 
@@ -59,12 +71,16 @@ public class Team : MonoBehaviour {
 
 		if (!beam.disrupted)
 		{
-			beam.distrupt();
-
-			PlayerSwap(0);
-
-			pattern.ResetIntensity();
+			FAIL();
 		}
+	}
+
+	public void FAIL(){
+		beam.distrupt();
+
+		PlayerSwap(0);
+
+		pattern.ResetIntensity();
 	}
 
 	public void PlayerSwap(int threshhold)

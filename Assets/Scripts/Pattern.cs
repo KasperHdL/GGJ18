@@ -24,8 +24,8 @@ public class Pattern : MonoBehaviour {
 	
 	private RumbleArgs rumbleArgument = new RumbleArgs();
 	private PatternArgs patternArgument = new PatternArgs();
-	
-	void Start()
+
+	public void Initialize()
 	{
 		initialTimeBetweenNotes = timeBetweenNotes;
 		patternArgument.teamID = teamID;

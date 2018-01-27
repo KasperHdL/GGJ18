@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TeamJoiner : MonoBehaviour {
 
+	public Character.RoverType teamType;
+
+	public Team team;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -15,7 +19,10 @@ public class TeamJoiner : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider coll){
-
+		if(coll.tag == "Player"){
+			Character c = coll.GetComponent<Character>();
+			c.SetRoverType(teamType);
+		}
 	}
 
 	void OnTriggerExit(Collider coll){
