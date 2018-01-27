@@ -20,6 +20,7 @@ public class Character : MonoBehaviour {
 
     [HideInInspector] public RoverType roverType;
 
+    [HideInInspector] public bool noControl;
 
     public Vector2 steering;
 
@@ -61,6 +62,7 @@ public class Character : MonoBehaviour {
 	}
 	
 	void Update () {
+        if (noControl) return;
 
         if(use_keyboard){
             steering.x = Input.GetAxis("Horizontal");
