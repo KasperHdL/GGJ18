@@ -18,7 +18,7 @@ public class Character : MonoBehaviour {
         Count
     }
 
-    private RoverType roverType;
+    [HideInInspector] public RoverType roverType;
 
 
     public Vector2 steering;
