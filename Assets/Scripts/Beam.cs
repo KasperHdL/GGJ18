@@ -4,9 +4,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Beam : MonoBehaviour {
-
+	[HideInInspector]
 	public GameObject player1;
+	[HideInInspector]
 	public GameObject player2;
+	
 	public float minDist;
 	public float maxDist;
 	public float middleDist;

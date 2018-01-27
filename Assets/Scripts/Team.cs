@@ -37,6 +37,9 @@ public class Team : MonoBehaviour {
 		
 		pattern.Initialize();
 
+		beam.player1 = receiver.gameObject;
+		beam.player2 = sender.gameObject;
+
 		PlayerSwap(50);
 	}
 
@@ -68,7 +71,7 @@ public class Team : MonoBehaviour {
 			return;
 		}
 
-		receiver.correctNoteFeedback.Play();
+		sender.correctNoteFeedback.Play();
 	}
 
 	public void PatternFailure(GameEventArgs argument)

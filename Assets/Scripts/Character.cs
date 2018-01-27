@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
+[RequireComponent(typeof(ParticleSystem))]
 public class Character : MonoBehaviour {
+    [HideInInspector]
     public ParticleSystem correctNoteFeedback;
 
     public enum Thumbstick{
@@ -51,6 +53,7 @@ public class Character : MonoBehaviour {
     [Header("Debug Info")]
     public float[] wheelForce = {0,0,0,0};
 	void Start () {
+        correctNoteFeedback = GetComponent<ParticleSystem>();
         body = GetComponent<Rigidbody>();
 
         roverType = (RoverType) Random.Range(0, (int)RoverType.Count);
