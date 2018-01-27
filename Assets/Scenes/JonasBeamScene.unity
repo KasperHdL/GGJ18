@@ -207,12 +207,12 @@ Prefab:
     - target: {fileID: 114328541582978010, guid: 42d20ccbb989de04a87effb3e2fb639c,
         type: 2}
       propertyPath: enabledColor.a
-      value: 1
+      value: 0.5019608
       objectReference: {fileID: 0}
     - target: {fileID: 114328541582978010, guid: 42d20ccbb989de04a87effb3e2fb639c,
         type: 2}
       propertyPath: distruptColor.a
-      value: 1
+      value: 0.5019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42d20ccbb989de04a87effb3e2fb639c, type: 2}
