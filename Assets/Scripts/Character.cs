@@ -27,26 +27,9 @@ public class Character : MonoBehaviour {
     public float vibrationLength = 0.5f;
 
 
-    [Header("Move Settings")]
-    public float moveForce;
-
-    public float innerOuterDeadzone;
-    public float wheelIsInnerForce;
-    public float wheelIsOuterForce;
-    public float wheelStraightForce;
-
-    public float reverseMaxDot;
-    public float reverseOffset;
-
-    public AnimationCurve frontWheelForce;
-    public AnimationCurve backWheelForce;
-
-    public float onGroundCheckDistance;
-
-    public bool noWheelsOnGround = true;
-    public float flipMinVelocity;
-    public float flipDelay;
-    public float startFlipAction = -1;
+    public CharacterSettings settings;
+    private bool noWheelsOnGround = true;
+    private float startFlipAction = -1;
 
 
     [Header("References")]
@@ -92,15 +75,15 @@ public class Character : MonoBehaviour {
         float forwardDot = Vector3.Dot(steering3, transform.forward);
         float dot = Vector3.Dot(steering3, transform.right);
 
-        if(forwardDot < reverseMaxDot){
+        if(forwardDot < settings.reverseMaxDot){
             float mag = steering3.magnitude;
-            steering3 += Mathf.Sign(dot) * transform.right * reverseOffset;
+            steering3 += Mathf.Sign(dot) * transform.right * settings.reverseOffset;
             steering3 = steering3.normalized * mag;
         }
 
 
         dot = Vector3.Dot(steering3, transform.right);
-        if(Mathf.Abs(dot) < innerOuterDeadzone) dot = 0;
+        if(Mathf.Abs(dot) < settings.innerOuterDeadzone) dot = 0;
 
         int drivingDirection = 0;
 
@@ -112,8 +95,9 @@ public class Character : MonoBehaviour {
             bool wheelIsRight = i % 2 == 0;
 
             //ground check
-            bool onGround = Physics.Raycast(wheels[i].transform.position, -transform.up, onGroundCheckDistance);
-            Debug.DrawRay(wheels[i].transform.position, -transform.up * onGroundCheckDistance, Color.red);
+            bool onGround = Physics.Raycast(wheels[i].transform.position, -transform.up, settings.onGroundCheckDistance);
+            Debug.DrawRay(wheels[i].transform.position, -transform.up * settings.onGroundCheckDistance, Color.red);
+
             if(!onGround) {
                 noWheelsOnGround = false;
                 continue;
@@ -128,25 +112,25 @@ public class Character : MonoBehaviour {
             if(i < 2){ //assume first two wheels are front wheels and therefor rotate
                 wheels[i].transform.rotation = Quaternion.LookRotation(steering3, Vector3.right);
 
-                dir = frontWheelForce.Evaluate(dir);
+                dir = settings.frontWheelForce.Evaluate(dir);
 
                 Debug.DrawRay(wheels[i].transform.position + 0.5f * Vector3.up, steering3.normalized, Color.green);
             }else{
                 bool drivingBackwards = dir < 0;
-                dir = backWheelForce.Evaluate(dir);
+                dir = settings.backWheelForce.Evaluate(dir);
             }
 
-            Vector3 force = wheels[i].transform.forward * moveForce * dir;
+            Vector3 force = wheels[i].transform.forward * settings.moveForce * dir;
 
             Color c;
             if((wheelIsRight && drivingDirection == 1) || (!wheelIsRight &&  drivingDirection == -1)){
-                force *= wheelIsInnerForce;
+                force *= settings.wheelIsInnerForce;
                 c = Color.blue;
             }else if((wheelIsRight && drivingDirection == -1) || (!wheelIsRight && drivingDirection == 1)){
-                force *= wheelIsOuterForce;
+                force *= settings.wheelIsOuterForce;
                 c = Color.red;
             }else{
-                force *= wheelStraightForce;
+                force *= settings.wheelStraightForce;
                 c = Color.magenta;
             }
 
@@ -160,9 +144,9 @@ public class Character : MonoBehaviour {
             body.AddForceAtPosition(force * Time.deltaTime, wheels[i].transform.position);
 		}
 
-		if(!noWheelsOnGround && body.velocity.magnitude < flipMinVelocity){
+		if(!noWheelsOnGround && body.velocity.magnitude < settings.flipMinVelocity){
             if(startFlipAction == -1){
-                startFlipAction = Time.time + flipDelay;
+                startFlipAction = Time.time + settings.flipDelay;
             }
 
             if(startFlipAction < Time.time){
@@ -178,11 +162,11 @@ public class Character : MonoBehaviour {
         //Visual Wheels
         //front
         for(int i = 0; i < 2; i++){
-            visualWheels[i].localRotation = Quaternion.Euler(0, -90 + wheels[i].localRotation.eulerAngles.y, -90);
+            visualWheels[i].localRotation = Quaternion.Euler(0, -90 + wheels[i].localRotation.eulerAngles.y / 2, -90);
         }
         //back
         for(int i = 2; i < 4; i++){
-            visualWheels[i].localRotation = Quaternion.Euler(0, -90 - wheels[i-2].localRotation.eulerAngles.y, -90);
+            visualWheels[i].localRotation = Quaternion.Euler(0, -90 - wheels[i-2].localRotation.eulerAngles.y /2, -90);
         }
 	}
 

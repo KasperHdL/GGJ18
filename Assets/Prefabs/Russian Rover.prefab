@@ -264,7 +264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394351257544456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4797110155250782}
@@ -905,54 +905,9 @@ MonoBehaviour:
   use_keyboard: 0
   playerIndex: 0
   thumbstick: 0
-  moveForce: 400
-  innerOuterDeadzone: 0.15
-  wheelIsInnerForce: 0.8
-  wheelIsOuterForce: 1.4
-  wheelStraightForce: 1.25
-  reverseMaxDot: -0.7
-  reverseOffset: 1
-  frontWheelForce:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  backWheelForce:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: -0.0017433167
-      value: 0.7952385
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1.0025531
-      value: 1.1943634
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  onGroundCheckDistance: 1.5
-  noWheelsOnGround: 1
-  flipMinVelocity: 1
-  flipDelay: 1
-  startFlipAction: -1
+  vibrationStrength: 0
+  vibrationLength: 0.5
+  settings: {fileID: 11400000, guid: f84f00fbc2f4dc348a20615d3755261d, type: 2}
   wheels:
   - {fileID: 4781914633417510}
   - {fileID: 4890042076897694}
