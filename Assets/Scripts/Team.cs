@@ -91,6 +91,11 @@ public class Team : MonoBehaviour {
 
 		while (hasSignal)
 		{
+			if (!beam.disrupted)
+			{
+				break;
+			}
+
 			if (!pattern.isPlayingPattern)
 			{
 				yield return new WaitForSeconds(patternIntervals);

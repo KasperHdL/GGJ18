@@ -219,6 +219,7 @@ public class Character : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("ENTER");
         if (other.tag.Equals("SignalZone"))
         {
             GameEventHandler.TriggerEvent(GameEvent.SignalEnter, signalArgument);
@@ -227,6 +228,7 @@ public class Character : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
+        Debug.Log("Exit");
         if (other.tag.Equals("SignalZone"))
         {
             GameEventHandler.TriggerEvent(GameEvent.SignalExit, signalArgument);
