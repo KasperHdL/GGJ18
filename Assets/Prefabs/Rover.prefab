@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 114208014071152662}
   m_Layer: 0
   m_Name: Rover
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1681,6 +1681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2c1f2171f7c46c0b3dc9df1ad2a108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 
   steering: {x: 0, y: 0}
   use_keyboard: 0
   playerIndex: 0
