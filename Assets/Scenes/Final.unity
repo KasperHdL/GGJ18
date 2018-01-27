@@ -832,6 +832,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   pattern: {fileID: 1174389580}
   beam: {fileID: 1174389579}
+  patternIntervals: 2
 --- !u!4 &1174389582
 Transform:
   m_ObjectHideFlags: 0
@@ -923,12 +924,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   startDuration: 1.5
-  minHeight: -25
+  minHeight: 0
   maxHeight: 70
   minDistHeightMap: 0
   maxDistHeightMap: 140
-  maxCameraMovement: 10
+  maxCameraMovement: 25
   planeMovementMultiplier: 0.75
+  startHasRun: 0
 --- !u!1001 &1278854006
 Prefab:
   m_ObjectHideFlags: 0
@@ -1222,6 +1224,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   pattern: {fileID: 1541470976}
   beam: {fileID: 1541470975}
+  patternIntervals: 2
 --- !u!4 &1541470978
 Transform:
   m_ObjectHideFlags: 0

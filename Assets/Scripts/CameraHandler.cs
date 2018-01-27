@@ -22,7 +22,7 @@ public class CameraHandler : MonoBehaviour {
 	public float maxCameraMovement;
 	public float planeMovementMultiplier;
 
-	public bool startHasRun = false;
+	private bool startHasRun = false;
 
 	private Character[] characters;
 
@@ -48,18 +48,25 @@ public class CameraHandler : MonoBehaviour {
 		Vector3 sum = Vector3.zero;
 
 			
+		int activePlayers = 0;
 		for(int i = 0; i < characters.Length;i++){
-			sum += characters[i].transform.position;
+			if(characters[i].gameObject.activeSelf){
+				activePlayers++;
+				sum += characters[i].transform.position;
+			}
 		}
 
-		sum *= planeMovementMultiplier;
 		sum.y = 0;
+		sum /= activePlayers;
 
 
 		float maxDistance = 0;
 
 		for(int i = 0; i < characters.Length; i++){
+			if(!characters[i].gameObject.activeSelf)continue;
+
 			for(int j = 1; j < characters.Length; j++){
+				if(!characters[j].gameObject.activeSelf)continue;
 				Vector3 delta = characters[i].transform.position - characters[j].transform.position;
 
 				if(delta.magnitude > maxDistance) maxDistance = delta.magnitude;
