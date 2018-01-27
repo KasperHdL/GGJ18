@@ -14,44 +14,11 @@ public class Pattern : MonoBehaviour {
 	[Range(0.0f, 5.0f)]
 	public float timeBetweenNotes;
 
-	private List<int> currentPattern = new List<int>();
-	
+	private List<int> currentPattern = new List<int>();	
 	private int patternSize = 10;
-	
 	private int currentPositionInPattern = 0;
-
 	private bool waitingForValue;
 	private bool correctInput;
-
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			Debug.Log("A PRESSED");
-			GenerateNewPattern();
-		}
-
-		if (Input.GetKeyDown(KeyCode.S))
-		{
-			Debug.Log("S PRESSED");
-			StartCoroutine("PlayPattern");
-		}
-
-		if (Input.GetKeyDown(KeyCode.Keypad0))
-		{
-			InputValue(InputValues.left);
-		}
-
-		if (Input.GetKeyDown(KeyCode.Keypad1))
-		{
-			InputValue(InputValues.right);
-		}
-
-		if (Input.GetKeyDown(KeyCode.Keypad2))
-		{
-			InputValue(InputValues.both);
-		}
-	}
 
 	public void GenerateNewPattern()
 	{
