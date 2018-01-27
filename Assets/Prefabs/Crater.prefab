@@ -22,11 +22,11 @@ GameObject:
   - component: {fileID: 33773572920199900}
   - component: {fileID: 23938940556825152}
   m_Layer: 0
-  m_Name: crater
+  m_Name: Crater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4356212224843622
 Transform:
