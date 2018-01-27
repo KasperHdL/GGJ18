@@ -13,3 +13,7 @@ public class RumbleArgs : GameEventArgs{
 public class PatternArgs : GameEventArgs{
     public int teamID;
 }
+
+public class SignalArgument : GameEventArgs{
+    public int playerID;
+}

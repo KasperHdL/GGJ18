@@ -12,8 +12,12 @@ public class Team : MonoBehaviour {
 	public Pattern pattern;
 	public Beam beam;
 
+	public float patternIntervals = 2.0f;
+
+	private bool hasSignal;
 	private bool left;
 	private bool right;
+	private bool playerFound;
 
 	void Start()
 	{
@@ -31,16 +35,13 @@ public class Team : MonoBehaviour {
 		beam.player2 = sender.gameObject;
 
 		PlayerSwap(50);
-	}
-
+        GameEventHandler.Subscribe(GameEvent.SignalEnter, SetReceiverSender);
+        GameEventHandler.Subscribe(GameEvent.SignalExit, CheckAndStopPlayPattern);
+    }
+	
 	void Update()
 	{
 		CheckSenderInput();
-
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			pattern.StartPlayPatternCoroutine();
-		}
 
 		RaycastHit hit;
 		if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
@@ -49,6 +50,54 @@ public class Team : MonoBehaviour {
 			{
 				FAIL();
 			}
+		}
+	}
+
+	public void CheckAndStopPlayPattern(GameEventArgs arguments)
+	{
+		SignalArgument signalArgument = (SignalArgument)arguments;
+
+		if (!playerFound)
+		{
+			return;
+		}
+
+		hasSignal = false;
+	}
+
+    public void SetReceiverSender(GameEventArgs arguments)
+	{
+		SignalArgument signalArgument = (SignalArgument)arguments;
+		playerFound = false;
+
+		if ((int)sender.playerIndex == signalArgument.playerID)
+		{
+			playerFound = true;
+			PlayerSwap(0);
+		} else if ((int)receiver.playerIndex == signalArgument.playerID)
+		{
+			playerFound = true;
+		}
+
+		if (playerFound)
+		{
+			StartCoroutine(RepeatedPlayback());
+		}
+	}
+
+	private IEnumerator RepeatedPlayback()
+	{
+		hasSignal = true;
+
+		while (hasSignal)
+		{
+			if (!pattern.isPlayingPattern)
+			{
+				yield return new WaitForSeconds(patternIntervals);
+				pattern.StartPlayPatternCoroutine();
+			}
+
+			yield return new WaitForEndOfFrame();
 		}
 	}
 

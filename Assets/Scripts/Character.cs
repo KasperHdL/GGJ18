@@ -20,7 +20,11 @@ public class Character : MonoBehaviour {
 
     [HideInInspector] public RoverType roverType;
 
+<<<<<<< HEAD
     [HideInInspector] public bool noControl;
+=======
+    private SignalArgument signalArgument = new SignalArgument();
+>>>>>>> signal setup
 
     public Vector2 steering;
 
@@ -53,14 +57,18 @@ public class Character : MonoBehaviour {
 
     [Header("Debug Info")]
     public float[] wheelForce = {0,0,0,0};
+
+
 	void Start () {
         correctNoteFeedback = GetComponent<ParticleSystem>();
         body = GetComponent<Rigidbody>();
 
         roverType = (RoverType) Random.Range(0, (int)RoverType.Count);
         visuals[(int)roverType].gameObject.SetActive(true);
-	}
-	
+
+        signalArgument.playerID = (int)playerIndex;
+    }
+
 	void Update () {
         if (noControl) return;
 
@@ -210,5 +218,21 @@ public class Character : MonoBehaviour {
         yield return new WaitForSeconds(vibrationLength);
 
         GamePad.SetVibration(playerIndex, 0.0f, 0.0f);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("SignalZone"))
+        {
+            GameEventHandler.TriggerEvent(GameEvent.SignalEnter, signalArgument);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag.Equals("SignalZone"))
+        {
+            GameEventHandler.TriggerEvent(GameEvent.SignalExit, signalArgument);
+        }
     }
 }

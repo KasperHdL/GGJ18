@@ -4,5 +4,7 @@
     PatternSuccess,
     PatternFailure,
     NoteSuccess,
+    SignalEnter,
+    SignalExit,
     Count,
 }
