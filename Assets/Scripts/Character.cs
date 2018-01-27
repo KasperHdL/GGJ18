@@ -110,6 +110,9 @@ public class Character : MonoBehaviour {
                 c = Color.magenta;
             }
 
+            if(drivingDirection == -1)
+                force *= 1.1f;
+
             Debug.DrawRay(wheels[i].transform.position, force.normalized, c);
 
             wheelForce[i] = force.magnitude;
