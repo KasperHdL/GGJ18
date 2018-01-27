@@ -11,6 +11,14 @@ public class Character : MonoBehaviour {
         Left,
         Right,
     }
+    public enum RoverType{
+        Russian,
+        Chinese,
+        Count
+    }
+
+    private RoverType roverType;
+
 
     public Vector2 steering;
 
@@ -36,7 +44,7 @@ public class Character : MonoBehaviour {
 
     [Header("References")]
     public Transform[] wheels;
-    public Transform[] visualWheels;
+    public RoverVisuals[] visuals;
 
     [HideInInspector] public Rigidbody body;
 
@@ -45,6 +53,9 @@ public class Character : MonoBehaviour {
     public float[] wheelForce = {0,0,0,0};
 	void Start () {
         body = GetComponent<Rigidbody>();
+
+        roverType = (RoverType) Random.Range(0, (int)RoverType.Count);
+        visuals[(int)roverType].gameObject.SetActive(true);
 	}
 	
 	void Update () {
@@ -162,15 +173,14 @@ public class Character : MonoBehaviour {
         }
 
         //Visual Wheels
-        //front
-        for(int i = 0; i < 2; i++){
-            visualWheels[i].localRotation = Quaternion.Euler(0, -90 + wheels[i].localRotation.eulerAngles.y / 2, -90);
-        }
-        //back
-        for(int i = 2; i < 4; i++){
-            visualWheels[i].localRotation = Quaternion.Euler(0, -90 - wheels[i-2].localRotation.eulerAngles.y /2, -90);
-        }
+        visuals[(int)roverType].UpdateWheels(wheels);
 	}
+
+    public void SetRoverType(RoverType type){
+        visuals[(int)roverType].gameObject.SetActive(false);
+        roverType = type;
+        visuals[(int)roverType].gameObject.SetActive(true);
+    }
 
     public void Vibrate(InputValues vibrationType)
     {
