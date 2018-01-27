@@ -46,6 +46,7 @@ public class Character : MonoBehaviour {
 
     [Header("References")]
     public Transform[] wheels;
+    public Transform[] visualWheels;
 
     [HideInInspector] public Rigidbody body;
 
@@ -158,7 +159,7 @@ public class Character : MonoBehaviour {
             if(startFlipAction == -1){
                 startFlipAction = Time.time + flipDelay;
             }
-            print(Time.time + " " + startFlipAction);
+
             if(startFlipAction < Time.time){
                 startFlipAction = -1;
 
@@ -167,6 +168,16 @@ public class Character : MonoBehaviour {
             }
         }else{
             startFlipAction = -1;
+        }
+
+        //Visual Wheels
+        //front
+        for(int i = 0; i < 2; i++){
+            visualWheels[i].localRotation = Quaternion.Euler(0, -90 + wheels[i].localRotation.eulerAngles.y, -90);
+        }
+        //back
+        for(int i = 2; i < 4; i++){
+            visualWheels[i].localRotation = Quaternion.Euler(0, -90 - wheels[i-2].localRotation.eulerAngles.y, -90);
         }
 	}
 }
