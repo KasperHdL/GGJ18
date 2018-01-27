@@ -26,6 +26,19 @@ public class Pattern : MonoBehaviour {
 	private RumbleArgs rumbleArgument = new RumbleArgs();
 	private PatternArgs patternArgument = new PatternArgs();
 
+	void Start()
+	{
+		GameEventHandler.Subscribe(GameEvent.SignalExit,StopPatternPlayback);
+		GameEventHandler.Subscribe(GameEvent.SignalEnter,StartPatternPlayback);
+	}
+	bool stopPatternPlayback = false;
+	private void StopPatternPlayback(GameEventArgs argument){
+		stopPatternPlayback = true;
+	}
+	private void StartPatternPlayback(GameEventArgs argument){
+		stopPatternPlayback = false;
+	}
+
 	public void Initialize()
 	{
 		initialTimeBetweenNotes = timeBetweenNotes;
@@ -74,6 +87,7 @@ public class Pattern : MonoBehaviour {
 			return;
 		}
 
+		Debug.Log("Index: " + currentCheckPosition + " List Size: " + currentPattern.Count);
 		correctInput = currentPattern[currentCheckPosition] == input;
 		
 		if (correctInput)
@@ -89,8 +103,10 @@ public class Pattern : MonoBehaviour {
 
 		if (currentCheckPosition == patternSize)
 		{
-			GameEventHandler.TriggerEvent(GameEvent.PatternSuccess, patternArgument);
+			GenerateNewPattern();
+			currentCheckPosition = 0;
 			waitingForValue = false;
+			GameEventHandler.TriggerEvent(GameEvent.PatternSuccess, patternArgument);
 		}
 	}
 
@@ -115,17 +131,26 @@ public class Pattern : MonoBehaviour {
 
 		while(currentPositionInPattern < patternSize)
 		{
+			if(stopPatternPlayback){
+				waitingForValue = false;
+				break;
+			}
+
 			// SEND VIBRATION INFORMATION
 			CallVibration(currentPattern[currentPositionInPattern]);
-
+			
 			yield return new WaitForSeconds(timeBetweenNotes);
 
 			// PREPARE FOR NEXT NUMBER
 			currentPositionInPattern ++;
 			correctInput = false;
+
+			if(stopPatternPlayback){
+				waitingForValue = false;
+				break;
+			}
 		}
 
-		currentPositionInPattern = 0;
 		isPlayingPattern = false;
 	}
 }

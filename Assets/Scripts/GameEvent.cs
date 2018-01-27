@@ -4,5 +4,9 @@
     PatternSuccess,
     PatternFailure,
     NoteSuccess,
+    SignalEnter,
+    SignalExit,
+    BeamDisrupted,
+    GameStarted,
     Count,
 }

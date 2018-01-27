@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Team0
   - Team1
+  - SignalZone
   layers:
   - Default
   - TransparentFX
@@ -42,4 +43,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particles
+    uniqueID: 594705563
+    locked: 0
+  - name: UI
+    uniqueID: 2974362095
     locked: 0

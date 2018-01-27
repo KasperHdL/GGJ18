@@ -25,7 +25,7 @@ public class Beam : MonoBehaviour {
 		line.GetComponent<Renderer>().sharedMaterial = lineMaterial;
 		currentColor = Color.black;
 		disrupted = true;
-		enable();
+		distrupt();
 	}
 
 	private float distruptTimer = 0f;

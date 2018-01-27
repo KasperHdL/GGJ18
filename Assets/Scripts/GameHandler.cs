@@ -9,6 +9,8 @@ public class GameHandler : MonoBehaviour {
 	public PlayerJoin playerJoin;
 	public Team[] teams;
 	public Text countdownText;
+	public IncomingSignalSpawner signalSpawner;
+
 
 	private Character[] characters;
 	private int[] numPlayersOnTeam;
@@ -76,9 +78,10 @@ public class GameHandler : MonoBehaviour {
 	public void StartGame(){
 		gameIsStarted = true;
 		countdownText.enabled = false; 
+		signalSpawner.enabled = true;
 
 		for(int i = 0; i < characters.Length; i++){
-			if(!characters[i].gameObject.active)continue;
+			if(!characters[i].gameObject.activeSelf) continue;
 
 			int index = (int) characters[i].roverType;
 
@@ -97,6 +100,8 @@ public class GameHandler : MonoBehaviour {
 			teams[i].gameObject.SetActive(true);
 			teams[i].teamID = i;
 		}
+
+		GameEventHandler.TriggerEvent(GameEvent.GameStarted);
 	}
 
 }

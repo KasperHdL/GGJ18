@@ -12,8 +12,12 @@ public class Team : MonoBehaviour {
 	public Pattern pattern;
 	public Beam beam;
 
+	public float patternIntervals = 2.0f;
+
+	private bool hasSignal;
 	private bool left;
 	private bool right;
+	private bool playerFound;
 
 	void Start()
 	{
@@ -31,24 +35,80 @@ public class Team : MonoBehaviour {
 		beam.player2 = sender.gameObject;
 
 		PlayerSwap(50);
-	}
-
+        GameEventHandler.Subscribe(GameEvent.SignalEnter, SetReceiverSender);
+        GameEventHandler.Subscribe(GameEvent.SignalExit, CheckAndStopPlayPattern);
+    }
+	
 	void Update()
 	{
 		CheckSenderInput();
 
-		if (Input.GetKeyDown(KeyCode.A))
+		if (!beam.disrupted)
 		{
-			pattern.StartPlayPatternCoroutine();
+			RaycastHit hit;
+			if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
+			{
+				if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
+				{
+					FAIL();
+				}
+			}
+		}
+	}
+
+	public void CheckAndStopPlayPattern(GameEventArgs arguments)
+	{
+		SignalArgument signalArgument = (SignalArgument)arguments;
+
+		if (!playerFound)
+		{
+			return;
 		}
 
-		RaycastHit hit;
-		if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
+		hasSignal = false;
+	}
+
+    public void SetReceiverSender(GameEventArgs arguments)
+	{
+		SignalArgument signalArgument = (SignalArgument)arguments;
+		playerFound = false;
+
+		if ((int)sender.playerIndex == signalArgument.playerID)
 		{
-			if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
+			playerFound = true;
+			PlayerSwap(0);
+		} else if ((int)receiver.playerIndex == signalArgument.playerID)
+		{
+			playerFound = true;
+		}
+
+		if (playerFound)
+		{
+			StartCoroutine(RepeatedPlayback());
+		}
+	}
+
+	private IEnumerator RepeatedPlayback()
+	{
+		hasSignal = true;
+
+		while (hasSignal)
+		{
+			if (!beam.disrupted)
 			{
-				FAIL();
+				break;
 			}
+
+			if (!pattern.isPlayingPattern)
+			{
+				yield return new WaitForSeconds(patternIntervals);
+				if (beam.disrupted)
+				{
+					pattern.StartPlayPatternCoroutine();
+				}
+			}
+
+			yield return new WaitForEndOfFrame();
 		}
 	}
 
@@ -72,14 +132,10 @@ public class Team : MonoBehaviour {
 		{
 			return;
 		}
-
-		if (!beam.disrupted)
-		{
-			FAIL();
-		}
 	}
 
 	public void FAIL(){
+		GameEventHandler.TriggerEvent(GameEvent.BeamDisrupted);
 		beam.distrupt();
 
 		PlayerSwap(0);
@@ -112,6 +168,7 @@ public class Team : MonoBehaviour {
 		if (beam.disrupted)
 		{
 			beam.enable();
+			hasSignal = false;
 		}
 	}
 
