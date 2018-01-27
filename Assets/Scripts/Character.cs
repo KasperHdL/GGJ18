@@ -178,7 +178,7 @@ public class Character : MonoBehaviour {
         }
 
         //Visual Wheels
-        visuals[(int)roverType].UpdateWheels(wheels, steering3);
+        visuals[(int)roverType].UpdateWheels(wheels);
 	}
 
     public void SetRoverType(RoverType type){

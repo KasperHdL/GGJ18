@@ -1714,7 +1714,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1304554334184574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2eed4cc1d4558741ba2032f0a0eb69b, type: 3}
+  m_Script: {fileID: 11500000, guid: cff2bd7fc9992af428cb5b5983e8d686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roverType: 0
@@ -1723,8 +1723,6 @@ MonoBehaviour:
   - {fileID: 4816525291841648}
   - {fileID: 4690666144066560}
   - {fileID: 4103512403236658}
-  frontWheelRotationMult: 1
-  backWheelRotationMult: 1
 --- !u!114 &114426230148294006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1733,7 +1731,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1068277553305314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2eed4cc1d4558741ba2032f0a0eb69b, type: 3}
+  m_Script: {fileID: 11500000, guid: cff2bd7fc9992af428cb5b5983e8d686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roverType: 1
@@ -1742,8 +1740,6 @@ MonoBehaviour:
   - {fileID: 4953379037106738}
   - {fileID: 4691760936470604}
   - {fileID: 4319801844458228}
-  frontWheelRotationMult: 1
-  backWheelRotationMult: 1
 --- !u!198 &198699498091264698
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1804,7 +1800,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1643581152
+  randomSeed: -1102835226
   InitialModule:
     serializedVersion: 3
     enabled: 1
