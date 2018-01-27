@@ -56,7 +56,7 @@ public class Team : MonoBehaviour {
 		{
 			RaycastHit hit;
 			if(Physics.Linecast(receiver.transform.position,sender.transform.position,out hit)){
-				if(!hit.transform.tag.Equals("Team"+teamID)||hit.distance<beam.minDist||hit.distance>beam.maxDist){
+				if(!hit.transform.tag.Equals("Team"+teamID)||hit.distance<beam.minDist){
 					FAIL();
 				}
 			}
@@ -151,7 +151,7 @@ public class Team : MonoBehaviour {
 		if (!pattern.isPlayingPattern)
 		{
 			playerDistance = Vector3.Distance(receiver.transform.position, sender.transform.position);
-			if (playerDistance > beam.minDist && playerDistance < beam.maxDist)
+			if (playerDistance > beam.minDist)
 			{
 				pattern.StartPlayPatternCoroutine();
 			}
