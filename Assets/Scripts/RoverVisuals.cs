@@ -12,12 +12,12 @@ public class RoverVisuals : MonoBehaviour {
 	public void UpdateWheels(Transform[] simWheels){
 		//front
         for(int i = 0; i < 2; i++){
-			wheels[i].localRotation = Quaternion.Euler(0, -90 + simWheels[i].localRotation.eulerAngles.y, -90);
+			wheels[i].localRotation = Quaternion.Euler(0, -90 + simWheels[i].localRotation.eulerAngles.y * wheelRotationMult, -90);
         }
 
         //back
 		for(int i = 2; i < 4; i++){
-			wheels[i].localRotation = Quaternion.Euler(0, -90 - simWheels[i-2].localRotation.eulerAngles.y, -90);
+			wheels[i].localRotation = Quaternion.Euler(0, -90 - simWheels[i-2].localRotation.eulerAngles.y * wheelRotationMult, -90);
         }
 	}
 }
