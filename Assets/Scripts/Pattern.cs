@@ -18,7 +18,8 @@ public class Pattern : MonoBehaviour {
 	public bool isPlayingPattern;
 
 	private List<InputValues> currentPattern = new List<InputValues>();	
-	private int currentPositionInPattern = 0;
+	private int currentCheckPosition = 0;
+
 	private bool waitingForValue;
 	private bool correctInput;
 	
@@ -73,14 +74,24 @@ public class Pattern : MonoBehaviour {
 			return;
 		}
 
-		correctInput = currentPattern[currentPositionInPattern] == input;
+		correctInput = currentPattern[currentCheckPosition] == input;
 		
 		if (correctInput)
 		{
 			GameEventHandler.TriggerEvent(GameEvent.NoteSuccess, patternArgument);
+			currentCheckPosition ++;
+		}
+		else
+		{
+			currentCheckPosition = 0;
+			GameEventHandler.TriggerEvent(GameEvent.PatternFailure, patternArgument);
 		}
 
-		waitingForValue = false;
+		if (currentCheckPosition == patternSize)
+		{
+			GameEventHandler.TriggerEvent(GameEvent.PatternSuccess, patternArgument);
+			waitingForValue = false;
+		}
 	}
 
 	public void CallVibration(InputValues type)
@@ -98,35 +109,20 @@ public class Pattern : MonoBehaviour {
 	{
 		Debug.Log("Pattern Coroutine Started");
 		isPlayingPattern = true;
+		waitingForValue = true;
+		
+		int currentPositionInPattern = 0;
 
 		while(currentPositionInPattern < patternSize)
 		{
 			// SEND VIBRATION INFORMATION
 			CallVibration(currentPattern[currentPositionInPattern]);
-			waitingForValue = true;
 
-			// WAIT FOR ANSWER
 			yield return new WaitForSeconds(timeBetweenNotes);
-
-			// CHECK ANSWER
-			if(!correctInput)
-			{
-				GameEventHandler.TriggerEvent(GameEvent.PatternFailure, patternArgument);
-
-				GenerateNewPattern();
-				currentPositionInPattern = 0;
-
-				break;
-			}
 
 			// PREPARE FOR NEXT NUMBER
 			currentPositionInPattern ++;
 			correctInput = false;
-
-			if (currentPositionInPattern == patternSize)
-			{
-				GameEventHandler.TriggerEvent(GameEvent.PatternSuccess, patternArgument);
-			}
 		}
 
 		currentPositionInPattern = 0;
