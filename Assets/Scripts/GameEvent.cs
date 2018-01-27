@@ -6,5 +6,6 @@
     NoteSuccess,
     SignalEnter,
     SignalExit,
+    BeamDisrupted,
     Count,
 }

@@ -43,12 +43,15 @@ public class Team : MonoBehaviour {
 	{
 		CheckSenderInput();
 
-		RaycastHit hit;
-		if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
+		if (!beam.disrupted)
 		{
-			if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
+			RaycastHit hit;
+			if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
 			{
-				FAIL();
+				if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
+				{
+					FAIL();
+				}
 			}
 		}
 	}
@@ -99,7 +102,10 @@ public class Team : MonoBehaviour {
 			if (!pattern.isPlayingPattern)
 			{
 				yield return new WaitForSeconds(patternIntervals);
-				pattern.StartPlayPatternCoroutine();
+				if (beam.disrupted)
+				{
+					pattern.StartPlayPatternCoroutine();
+				}
 			}
 
 			yield return new WaitForEndOfFrame();
@@ -126,14 +132,10 @@ public class Team : MonoBehaviour {
 		{
 			return;
 		}
-
-		if (!beam.disrupted)
-		{
-			FAIL();
-		}
 	}
 
 	public void FAIL(){
+		GameEventHandler.TriggerEvent(GameEvent.BeamDisrupted);
 		beam.distrupt();
 
 		PlayerSwap(0);
@@ -166,6 +168,7 @@ public class Team : MonoBehaviour {
 		if (beam.disrupted)
 		{
 			beam.enable();
+			hasSignal = false;
 		}
 	}
 
