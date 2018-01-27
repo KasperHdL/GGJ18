@@ -160,6 +160,11 @@ Prefab:
       propertyPath: m_TagString
       value: Team1
       objectReference: {fileID: 0}
+    - target: {fileID: 114208014071152662, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: vibrationStrength
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
   m_IsPrefabParent: 0
@@ -199,10 +204,10 @@ MonoBehaviour:
   controllersJoined: 
   playersJoined: 
   characters:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 935530426}
+  - {fileID: 1466014283}
+  - {fileID: 942286319}
+  - {fileID: 493616963}
 --- !u!4 &621238919
 Transform:
   m_ObjectHideFlags: 0
@@ -259,10 +264,6 @@ Prefab:
       propertyPath: m_Name
       value: p1
       objectReference: {fileID: 0}
-    - target: {fileID: 1346820212786480, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
-      propertyPath: m_TagString
-      value: Team0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
   m_IsPrefabParent: 0
@@ -318,6 +319,11 @@ Prefab:
     - target: {fileID: 1346820212786480, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
       propertyPath: m_TagString
       value: Team1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114208014071152662, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: vibrationStrength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
@@ -555,8 +561,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
   player2: {fileID: 0}
-  minDist: 2
-  maxDist: 10
+  minDist: 10
+  maxDist: 45
   middleDist: 0
   disrupted: 0
   lineMaterial: {fileID: 2100000, guid: 87798f0a40b4e9c47b87b58098e62412, type: 2}
@@ -728,8 +734,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
   player2: {fileID: 0}
-  minDist: 2
-  maxDist: 10
+  minDist: 10
+  maxDist: 45
   middleDist: 0
   disrupted: 0
   lineMaterial: {fileID: 2100000, guid: 87798f0a40b4e9c47b87b58098e62412, type: 2}
@@ -827,6 +833,11 @@ Prefab:
     - target: {fileID: 1346820212786480, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
       propertyPath: m_TagString
       value: Team0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114208014071152662, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: vibrationStrength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
