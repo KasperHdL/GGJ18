@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamID: 0
-  timeBetweenNotes: 0.5
+  timeBetweenNotes: 0.8
   patternSize: 4
   intensityIncreasePercentage: 0.1
   isPlayingPattern: 0
@@ -1178,8 +1178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamID: 0
-  timeBetweenNotes: 1
-  patternSize: 3
+  timeBetweenNotes: 0.8
+  patternSize: 4
   intensityIncreasePercentage: 0.1
   isPlayingPattern: 0
 --- !u!114 &1541470977
@@ -1368,6 +1368,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1513348615122246, guid: 0265e00b654c7d54e87f6f5c11c30dbb, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255097930034778, guid: 0265e00b654c7d54e87f6f5c11c30dbb,
+        type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
