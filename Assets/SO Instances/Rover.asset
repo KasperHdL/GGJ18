@@ -55,5 +55,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   onGroundCheckDistance: 1.5
-  flipMinVelocity: 1
+  flipMinVelocity: 2
   flipDelay: 1

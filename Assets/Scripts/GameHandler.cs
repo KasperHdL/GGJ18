@@ -7,16 +7,19 @@ public class GameHandler : MonoBehaviour {
 
 	[Header("References")]
 	public PlayerJoin playerJoin;
-	private Character[] characters;
+	public Team[] teams;
+	public Text countdownText;
 
+	private Character[] characters;
 	private int[] numPlayersOnTeam;
 
+
+
+	[Header("Start Settings")]
 	public float startDelay;
 	private float startGameTime = -1;
-
 	private bool gameIsStarted = false;
 
-	public Text countdownText;
 
 	public static GameHandler instance;
 
@@ -67,12 +70,29 @@ public class GameHandler : MonoBehaviour {
 	}
 	public void PlayerLeftTeam(Character.RoverType type){
 		numPlayersOnTeam[(int) type]--;
+		startGameTime = -1;
 	}
 
 	public void StartGame(){
 		gameIsStarted = true;
-		countdownText.enabled = false;
+		countdownText.enabled = false; 
 
+		int i = -1;
+		while(i++ < 100){
+			int index = (int) characters[i].roverType;
+
+			if(teams[index].receiver == null){
+				teams[index].receiver = characters[i];
+				continue;
+			}
+
+			if(teams[index].sender == null){
+				teams[index].sender = characters[i];
+				continue;
+			}
+
+			teams[index].enabled = true;
+		}
 	}
 
 }

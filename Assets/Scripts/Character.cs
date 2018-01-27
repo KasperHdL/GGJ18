@@ -39,7 +39,7 @@ public class Character : MonoBehaviour {
 
 
     public CharacterSettings settings;
-    private bool noWheelsOnGround = true;
+    private int wheelsOffGround = 0;
     private float startFlipAction = -1;
 
 
@@ -105,7 +105,7 @@ public class Character : MonoBehaviour {
         if(dot != 0)
             drivingDirection = (int)Mathf.Sign(dot);
 
-        noWheelsOnGround = true;
+        wheelsOffGround = 0;
         for(int i = 0; i < wheels.Length; i++){
             bool wheelIsRight = i % 2 == 0;
 
@@ -114,8 +114,7 @@ public class Character : MonoBehaviour {
             Debug.DrawRay(wheels[i].transform.position, -transform.up * settings.onGroundCheckDistance, Color.red);
 
             if(!onGround) {
-                noWheelsOnGround = false;
-                continue;
+                wheelsOffGround++;
             }
 
             if(noInput) continue;
@@ -134,6 +133,8 @@ public class Character : MonoBehaviour {
                 bool drivingBackwards = dir < 0;
                 dir = settings.backWheelForce.Evaluate(dir) * (drivingBackwards ? 0: 1);
             }
+
+            if(!onGround)continue;
 
             Vector3 force = wheels[i].transform.forward * settings.moveForce * dir;
 
@@ -159,7 +160,9 @@ public class Character : MonoBehaviour {
             body.AddForceAtPosition(force * Time.deltaTime, wheels[i].transform.position);
 		}
 
-		if(!noWheelsOnGround && body.velocity.magnitude < settings.flipMinVelocity){
+        float upDot = Vector3.Dot(transform.up, Vector3.up);
+
+		if(upDot < 0.75 && wheelsOffGround > 3 && body.velocity.magnitude < settings.flipMinVelocity){
             if(startFlipAction == -1){
                 startFlipAction = Time.time + settings.flipDelay;
             }
@@ -167,7 +170,7 @@ public class Character : MonoBehaviour {
             if(startFlipAction < Time.time){
                 startFlipAction = -1;
 
-                transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+                transform.rotation = Quaternion.Euler(0,0,0);
                 transform.position += Vector3.up;
             }
         }else{
