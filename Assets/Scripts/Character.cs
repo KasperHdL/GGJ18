@@ -35,10 +35,14 @@ public class Character : MonoBehaviour {
 
     public float onGroundCheckDistance;
 
+    public bool noWheelsOnGround = true;
+    public float flipMinVelocity;
+    public float flipDelay;
+    public float startFlipAction = -1;
+
 
     [Header("References")]
     public Transform[] wheels;
-
 
     [HideInInspector] public Rigidbody body;
 
@@ -67,7 +71,7 @@ public class Character : MonoBehaviour {
             }
         }
 
-        if(steering == Vector2.zero)return;
+        bool noInput = steering == Vector2.zero;
         steering = steering.normalized;
 
         if(Mathf.Abs(steering.x) == 1)
@@ -84,13 +88,19 @@ public class Character : MonoBehaviour {
         if(dot != 0)
             drivingDirection = (int)Mathf.Sign(dot);
 
+        noWheelsOnGround = true;
         for(int i = 0; i < wheels.Length; i++){
             bool wheelIsRight = i % 2 == 0;
 
             //ground check
             bool onGround = Physics.Raycast(wheels[i].transform.position, -transform.up, onGroundCheckDistance);
             Debug.DrawRay(wheels[i].transform.position, -transform.up * onGroundCheckDistance, Color.red);
-            if(!onGround) continue;
+            if(!onGround) {
+                noWheelsOnGround = false;
+                continue;
+            }
+
+            if(noInput) continue;
 
 
             float dir = Vector3.Dot(wheels[i].transform.forward, steering3);
@@ -130,7 +140,19 @@ public class Character : MonoBehaviour {
             body.AddForceAtPosition(force * Time.deltaTime, wheels[i].transform.position);
         }
 
+        if(!noWheelsOnGround && body.velocity.magnitude < flipMinVelocity){
+            if(startFlipAction == -1){
+                startFlipAction = Time.time + flipDelay;
+            }
+            print(Time.time + " " + startFlipAction);
+            if(startFlipAction < Time.time){
+                startFlipAction = -1;
 
-		
+                transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+                transform.position += Vector3.up;
+            }
+        }else{
+            startFlipAction = -1;
+        }
 	}
 }
