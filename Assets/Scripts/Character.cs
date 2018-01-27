@@ -132,7 +132,7 @@ public class Character : MonoBehaviour {
                 Debug.DrawRay(wheels[i].transform.position + 0.5f * Vector3.up, steering3.normalized, Color.green);
             }else{
                 bool drivingBackwards = dir < 0;
-                dir = settings.backWheelForce.Evaluate(dir);
+                dir = settings.backWheelForce.Evaluate(dir) * (drivingBackwards ? 0: 1);
             }
 
             Vector3 force = wheels[i].transform.forward * settings.moveForce * dir;
@@ -175,7 +175,7 @@ public class Character : MonoBehaviour {
         }
 
         //Visual Wheels
-        visuals[(int)roverType].UpdateWheels(wheels);
+        visuals[(int)roverType].UpdateWheels(wheels, steering3);
 	}
 
     public void SetRoverType(RoverType type){

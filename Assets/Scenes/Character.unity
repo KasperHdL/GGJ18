@@ -455,6 +455,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114426230148294006, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: frontWheelRotationMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114426230148294006, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: backWheelRotationMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114426230148294006, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: backWheelMaxAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 114426230148294006, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: backWheelMinAngle
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 114380173241279946, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: frontWheelRotationMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114380173241279946, guid: 92c97f42e726b984cb111a0b73160db3,
+        type: 2}
+      propertyPath: backWheelRotationMult
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92c97f42e726b984cb111a0b73160db3, type: 2}
   m_IsPrefabParent: 0

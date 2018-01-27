@@ -1684,6 +1684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctNoteFeedback: {fileID: 0}
+  roverType: 0
   steering: {x: 0, y: 0}
   use_keyboard: 0
   playerIndex: 0
@@ -1722,7 +1723,8 @@ MonoBehaviour:
   - {fileID: 4816525291841648}
   - {fileID: 4690666144066560}
   - {fileID: 4103512403236658}
-  wheelRotationMult: 0.5
+  frontWheelRotationMult: 1
+  backWheelRotationMult: 1
 --- !u!114 &114426230148294006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1740,7 +1742,8 @@ MonoBehaviour:
   - {fileID: 4953379037106738}
   - {fileID: 4691760936470604}
   - {fileID: 4319801844458228}
-  wheelRotationMult: 0.5
+  frontWheelRotationMult: 1
+  backWheelRotationMult: 1
 --- !u!198 &198699498091264698
 ParticleSystem:
   m_ObjectHideFlags: 1
