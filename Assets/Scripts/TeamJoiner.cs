@@ -26,7 +26,7 @@ public class TeamJoiner : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider coll){
-		if(coll.tag == "Player"){
+		if(coll.tag == "Team0" || coll.tag  == "Team1"){
 			Character c = coll.GetComponent<Character>();
 			c.SetRoverType(teamType);
 			numPlayers++;
@@ -36,7 +36,7 @@ public class TeamJoiner : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider coll){
-		if(coll.tag == "Player"){
+		if(coll.tag == "Team0" || coll.tag  == "Team1"){
 			numPlayers--;
 			gameHandler.PlayerLeftTeam(teamType);
 			missingPlayers.text = 2-numPlayers + " Players Missing";
