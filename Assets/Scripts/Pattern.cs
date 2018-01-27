@@ -2,65 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InputValues
-{
-	left,
-	right,
-	both,
-	count
-}
-
 public class Pattern : MonoBehaviour {
-	[Range(0.0f, 5.0f)]
+	[HideInInspector]
+	public int teamID;
+	
+	[Range(0.5f, 5.0f)]
 	public float timeBetweenNotes;
+	private float initialTimeBetweenNotes;
 
-	private List<int> currentPattern = new List<int>();
-	
-	private int patternSize = 10;
-	
+	public int patternSize = 10;
+
+	[Range(0.01f, 1.0f)]
+	public float intensityIncreasePercentage = 0.1f;
+
+	public bool isPlayingPattern;
+
+	private List<InputValues> currentPattern = new List<InputValues>();	
 	private int currentPositionInPattern = 0;
-
 	private bool waitingForValue;
 	private bool correctInput;
-
-	void Update()
+	
+	private RumbleArgs rumbleArgument = new RumbleArgs();
+	private PatternArgs patternArgument = new PatternArgs();
+	
+	void Start()
 	{
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			Debug.Log("A PRESSED");
-			GenerateNewPattern();
-		}
+		initialTimeBetweenNotes = timeBetweenNotes;
+		patternArgument.teamID = teamID;
+		rumbleArgument.teamID = teamID;
+	}
 
-		if (Input.GetKeyDown(KeyCode.S))
-		{
-			Debug.Log("S PRESSED");
-			StartCoroutine("PlayPattern");
-		}
+	public List<InputValues> GetCurrentPattern()
+	{
+		return currentPattern;
+	}
 
-		if (Input.GetKeyDown(KeyCode.Keypad0))
-		{
-			InputValue(InputValues.left);
-		}
+	public void ResetIntensity()
+	{
+		timeBetweenNotes = initialTimeBetweenNotes;
+	}
 
-		if (Input.GetKeyDown(KeyCode.Keypad1))
+	public void IncreaseIntensity()
+	{
+		float temp = timeBetweenNotes - timeBetweenNotes * intensityIncreasePercentage;
+		if (temp < 0.5f)
 		{
-			InputValue(InputValues.right);
+			timeBetweenNotes = 0.5f;
 		}
-
-		if (Input.GetKeyDown(KeyCode.Keypad2))
+		else
 		{
-			InputValue(InputValues.both);
+			timeBetweenNotes = temp;
 		}
 	}
 
 	public void GenerateNewPattern()
 	{
+		currentPattern.Clear();
+
 		for (int i = 0; i < patternSize; i++)
 		{
-			int value = Random.Range(0, (int)(InputValues.count));
-			currentPattern.Add(value);
-
-			Debug.Log(value);
+			int value = Random.Range(0, (int)(InputValues.Count));
+			currentPattern.Add((InputValues)value);
 		}
 	}
 
@@ -71,24 +73,31 @@ public class Pattern : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log("INSERTED VALUE: " + (int)input);
-
-		correctInput = currentPattern[currentPositionInPattern] == (int)input;
+		correctInput = currentPattern[currentPositionInPattern] == input;
 		
 		waitingForValue = false;
 	}
 
-	public List<int> GetCurrentPattern()
+	public void CallVibration(InputValues type)
 	{
-		return currentPattern;
+		rumbleArgument.vibrationType = type;
+		GameEventHandler.TriggerEvent(GameEvent.Rumble, rumbleArgument);
+	}
+
+	public void StartPlayPatternCoroutine()
+	{
+		StartCoroutine(PlayPattern());
 	}
 
 	public IEnumerator PlayPattern()
 	{
+		Debug.Log("Pattern Coroutine Started");
+		isPlayingPattern = true;
+
 		while(currentPositionInPattern < patternSize)
 		{
 			// SEND VIBRATION INFORMATION
-			Debug.Log(currentPattern[currentPositionInPattern]);
+			CallVibration(currentPattern[currentPositionInPattern]);
 			waitingForValue = true;
 
 			// WAIT FOR ANSWER
@@ -97,18 +106,25 @@ public class Pattern : MonoBehaviour {
 			// CHECK ANSWER
 			if(!correctInput)
 			{
-				Debug.Log("WRONG INPUT!!!");
+				GameEventHandler.TriggerEvent(GameEvent.PatternFailure, patternArgument);
+
 				GenerateNewPattern();
 				currentPositionInPattern = 0;
 
 				break;
 			}
 
-			Debug.Log("YAAAY");
-
 			// PREPARE FOR NEXT NUMBER
 			currentPositionInPattern ++;
 			correctInput = false;
+
+			if (currentPositionInPattern == patternSize)
+			{
+				GameEventHandler.TriggerEvent(GameEvent.PatternSuccess, patternArgument);
+			}
 		}
+
+		currentPositionInPattern = 0;
+		isPlayingPattern = false;
 	}
 }

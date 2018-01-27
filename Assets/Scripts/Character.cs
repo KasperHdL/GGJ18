@@ -21,6 +21,11 @@ public class Character : MonoBehaviour {
     public GamePadState state;
     public GamePadState prevState;
 
+    [Range(0.1f, 1.0f)]
+    public float vibrationStrength;
+    [Range(0.1f, 0.5f)]
+    public float vibrationLength = 0.5f;
+
 
     [Header("Move Settings")]
     public float moveForce;
@@ -153,9 +158,9 @@ public class Character : MonoBehaviour {
             wheelForce[i] = force.magnitude;
 
             body.AddForceAtPosition(force * Time.deltaTime, wheels[i].transform.position);
-        }
+		}
 
-        if(!noWheelsOnGround && body.velocity.magnitude < flipMinVelocity){
+		if(!noWheelsOnGround && body.velocity.magnitude < flipMinVelocity){
             if(startFlipAction == -1){
                 startFlipAction = Time.time + flipDelay;
             }
@@ -180,4 +185,31 @@ public class Character : MonoBehaviour {
             visualWheels[i].localRotation = Quaternion.Euler(0, -90 - wheels[i-2].localRotation.eulerAngles.y, -90);
         }
 	}
+
+    public void Vibrate(InputValues vibrationType)
+    {
+        switch(vibrationType)
+        {
+            case InputValues.Both:
+                GamePad.SetVibration(playerIndex, vibrationStrength, vibrationStrength);
+            break;
+
+            case InputValues.Left:
+                GamePad.SetVibration(playerIndex, vibrationStrength, 0.0f);
+            break;
+
+            case InputValues.Right:
+                GamePad.SetVibration(playerIndex, 0.0f, vibrationStrength);
+            break;
+        }
+
+        StartCoroutine(StopVibrationAfterTimer());
+    }
+
+    public IEnumerator StopVibrationAfterTimer()
+    {
+        yield return new WaitForSeconds(vibrationLength);
+
+        GamePad.SetVibration(playerIndex, 0.0f, 0.0f);
+    }
 }
