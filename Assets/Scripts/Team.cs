@@ -33,22 +33,12 @@ public class Team : MonoBehaviour {
 
 		pattern.teamID = teamID;
 		pattern.GenerateNewPattern();
+		
+		PlayerSwap(50);
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			Debug.Log("A PRESSED");
-			pattern.StartPlayPatternCoroutine();
-		}
-
-		if (Input.GetKeyDown(KeyCode.V))
-		{
-			GamePad.SetVibration(PlayerIndex.One, 1, 1);
-			GamePad.SetVibration(PlayerIndex.Two, 1, 1);
-		}
-
 		CheckSenderInput();
 
 		if (beam.disrupted)
@@ -56,6 +46,7 @@ public class Team : MonoBehaviour {
 			CheckPatternStart();
 		}
 	}
+
 	public void PatternFailure(GameEventArgs argument)
 	{
 		Debug.Log("Pattern Failed");
@@ -70,7 +61,23 @@ public class Team : MonoBehaviour {
 		{
 			beam.distrupt();
 
+			PlayerSwap(0);
+
 			pattern.ResetIntensity();
+		}
+	}
+
+	public void PlayerSwap(int threshhold)
+	{
+		int randomNum = Random.Range(0, 100);
+
+		Debug.Log(randomNum);
+
+		if (randomNum >= threshhold)
+		{
+			Character temp = sender;
+			sender = receiver;
+			receiver = temp;
 		}
 	}
 

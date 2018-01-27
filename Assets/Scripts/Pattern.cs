@@ -57,6 +57,8 @@ public class Pattern : MonoBehaviour {
 
 	public void GenerateNewPattern()
 	{
+		currentPattern.Clear();
+
 		for (int i = 0; i < patternSize; i++)
 		{
 			int value = Random.Range(0, (int)(InputValues.Count));

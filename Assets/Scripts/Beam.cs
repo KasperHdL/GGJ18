@@ -36,7 +36,7 @@ public class Beam : MonoBehaviour {
 	private float t = 0;
 
 	void Update () {
-		if(!disrupted){
+		/*if(!disrupted){
 		RaycastHit hit;
 			if(Physics.Linecast(player1.transform.position,player2.transform.position,out hit)){
 				if(!hit.transform.tag.Equals("Player")||hit.distance<minDist||hit.distance>maxDist){
@@ -50,7 +50,7 @@ public class Beam : MonoBehaviour {
 					}
 				}
 			}
-		}
+		}*/
 		Debug.DrawLine(player1.transform.position,player2.transform.position,currentColor,Time.deltaTime);
 		line.SetPosition(0,player1.transform.position);
 		line.SetPosition(1,player2.transform.position);
