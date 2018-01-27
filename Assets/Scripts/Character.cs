@@ -33,6 +33,8 @@ public class Character : MonoBehaviour {
     public AnimationCurve frontWheelForce;
     public AnimationCurve backWheelForce;
 
+    public float onGroundCheckDistance;
+
 
     [Header("References")]
     public Transform[] wheels;
@@ -41,6 +43,7 @@ public class Character : MonoBehaviour {
     [HideInInspector] public Rigidbody body;
 
 
+    [Header("Debug Info")]
     public float[] wheelForce = {0,0,0,0};
 	void Start () {
         body = GetComponent<Rigidbody>();
@@ -83,6 +86,12 @@ public class Character : MonoBehaviour {
 
         for(int i = 0; i < wheels.Length; i++){
             bool wheelIsRight = i % 2 == 0;
+
+            //ground check
+            bool onGround = Physics.Raycast(wheels[i].transform.position, -transform.up, onGroundCheckDistance);
+            Debug.DrawRay(wheels[i].transform.position, -transform.up * onGroundCheckDistance, Color.red);
+            if(!onGround) continue;
+
 
             float dir = Vector3.Dot(wheels[i].transform.forward, steering3);
 

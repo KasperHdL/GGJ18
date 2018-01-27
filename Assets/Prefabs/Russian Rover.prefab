@@ -946,6 +946,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  onGroundCheckDistance: 1.5
   wheels:
   - {fileID: 4781914633417510}
   - {fileID: 4890042076897694}
