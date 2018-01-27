@@ -176,6 +176,21 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: randomSeed
+      value: -394447040
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
   m_IsPrefabParent: 0
@@ -207,7 +222,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllersJoined: 
-  playersReady: 
   playersJoined: 
   characters:
   - {fileID: 804414650}
@@ -526,7 +540,7 @@ MonoBehaviour:
   sender: {fileID: 1093691155}
   pattern: {fileID: 1278885791}
   beam: {fileID: 1278885790}
-  inputMargin: 0.52
+  inputMargin: 0.1
 --- !u!4 &1278885793
 Transform:
   m_ObjectHideFlags: 0
@@ -592,6 +606,21 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1379155397
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
   m_IsPrefabParent: 0
@@ -646,6 +675,21 @@ Prefab:
     - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: randomSeed
+      value: 2008347629
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: lengthInSec
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
@@ -955,6 +999,21 @@ Prefab:
     - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: randomSeed
+      value: 1233159689
+      objectReference: {fileID: 0}
+    - target: {fileID: 198137983243701404, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: lengthInSec
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}

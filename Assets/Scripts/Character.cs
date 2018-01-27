@@ -4,8 +4,7 @@ using UnityEngine;
 using XInputDotNetPure;
 
 public class Character : MonoBehaviour {
-
-    public string x;
+    public ParticleSystem correctNoteFeedback;
 
     public enum Thumbstick{
         Left,

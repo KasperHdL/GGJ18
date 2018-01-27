@@ -3,5 +3,6 @@
     Rumble,
     PatternSuccess,
     PatternFailure,
+    NoteSuccess,
     Count,
 }
