@@ -188,10 +188,6 @@ public class Character : MonoBehaviour {
     {
         switch(vibrationType)
         {
-            case InputValues.Both:
-                GamePad.SetVibration(playerIndex, vibrationStrength, vibrationStrength);
-            break;
-
             case InputValues.Left:
                 GamePad.SetVibration(playerIndex, vibrationStrength, 0.0f);
             break;
