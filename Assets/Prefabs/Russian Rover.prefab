@@ -910,6 +910,8 @@ MonoBehaviour:
   wheelIsInnerForce: 0.8
   wheelIsOuterForce: 1.4
   wheelStraightForce: 1.25
+  reverseMaxDot: -0.7
+  reverseOffset: 10
   frontWheelForce:
     serializedVersion: 2
     m_Curve:
@@ -947,6 +949,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   onGroundCheckDistance: 1.5
+  noWheelsOnGround: 1
+  flipMinVelocity: 1
+  flipDelay: 1
+  startFlipAction: -1
   wheels:
   - {fileID: 4781914633417510}
   - {fileID: 4890042076897694}

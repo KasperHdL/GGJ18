@@ -30,6 +30,9 @@ public class Character : MonoBehaviour {
     public float wheelIsOuterForce;
     public float wheelStraightForce;
 
+    public float reverseMaxDot;
+    public float reverseOffset;
+
     public AnimationCurve frontWheelForce;
     public AnimationCurve backWheelForce;
 
@@ -80,7 +83,17 @@ public class Character : MonoBehaviour {
 
         Vector3 steering3 = Vector3.right * steering.x + Vector3.forward * steering.y;
 
+        float forwardDot = Vector3.Dot(steering3, transform.forward);
         float dot = Vector3.Dot(steering3, transform.right);
+
+        if(forwardDot < reverseMaxDot){
+            float mag = steering3.magnitude;
+            steering3 += Mathf.Sign(dot) * transform.right * reverseOffset;
+            steering3 = steering3.normalized * mag;
+        }
+
+
+        dot = Vector3.Dot(steering3, transform.right);
         if(Mathf.Abs(dot) < innerOuterDeadzone) dot = 0;
 
         int drivingDirection = 0;
@@ -104,6 +117,7 @@ public class Character : MonoBehaviour {
 
 
             float dir = Vector3.Dot(wheels[i].transform.forward, steering3);
+
 
             if(i < 2){ //assume first two wheels are front wheels and therefor rotate
                 wheels[i].transform.rotation = Quaternion.LookRotation(steering3, Vector3.right);
