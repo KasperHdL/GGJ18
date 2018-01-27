@@ -92,6 +92,7 @@ public class GameHandler : MonoBehaviour {
 			}
 
 			teams[index].enabled = true;
+			teams[index].teamID = index;
 		}
 	}
 
