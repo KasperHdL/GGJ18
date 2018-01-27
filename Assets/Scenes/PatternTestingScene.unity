@@ -167,6 +167,15 @@ Prefab:
       propertyPath: m_Name
       value: Russian Rover1t2
       objectReference: {fileID: 0}
+    - target: {fileID: 114797445610373430, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: vibrationStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
   m_IsPrefabParent: 0
@@ -307,7 +316,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.6397059, g: 0.4680775, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -512,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9d4927d62169f43872c1a1dd3bcdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamID: 0
+  teamID: 1
   receiver: {fileID: 1234245358}
   sender: {fileID: 1093691155}
   pattern: {fileID: 1278885791}
@@ -574,6 +583,15 @@ Prefab:
       propertyPath: m_Name
       value: Russian Rover1t1
       objectReference: {fileID: 0}
+    - target: {fileID: 114797445610373430, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: vibrationStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
   m_IsPrefabParent: 0
@@ -619,6 +637,15 @@ Prefab:
     - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
       propertyPath: m_Name
       value: Russian Rover2t2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114797445610373430, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: vibrationStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
@@ -919,6 +946,15 @@ Prefab:
     - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
       propertyPath: m_Name
       value: Russian Rover2t1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114797445610373430, guid: dfc67445d49bf994f8b1395f391d6052,
+        type: 2}
+      propertyPath: vibrationStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394351257544456, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc67445d49bf994f8b1395f391d6052, type: 2}

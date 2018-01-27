@@ -5,6 +5,8 @@ using XInputDotNetPure;
 
 public class Character : MonoBehaviour {
 
+    public string x;
+
     public enum Thumbstick{
         Left,
         Right,
@@ -22,7 +24,7 @@ public class Character : MonoBehaviour {
     public GamePadState prevState;
 
     [Range(0.1f, 1.0f)]
-    public float vibrationStrength;
+    public float vibrationStrength = 1.0f;
     [Range(0.1f, 0.5f)]
     public float vibrationLength = 0.5f;
 

@@ -34,6 +34,8 @@ public class Team : MonoBehaviour {
 		pattern.teamID = teamID;
 		pattern.GenerateNewPattern();
 		
+		pattern.Initialize();
+
 		PlayerSwap(50);
 	}
 
