@@ -6,6 +6,7 @@ using XInputDotNetPure;
 public class PlayerJoin : MonoBehaviour {
     public bool[] controllersJoined;        // 0 = first controller, 1 = second controller, etc.
     public bool[] playersReady;
+    private bool[] isConnected = {false};
     public List<int> playersJoined;        // if [0] = 1, then first player equals second controller, if [1] = 3 then second player equals fourth controller, etc.
 
     private GamePadState[] state;
@@ -18,6 +19,7 @@ public class PlayerJoin : MonoBehaviour {
         playersJoined = new List<int>();
         controllersJoined = new bool[4];
         playersReady = new bool[4];
+        isConnected = new bool[4];
         state = new GamePadState[4];
         prevStates = new GamePadState[4];
 
@@ -36,71 +38,25 @@ public class PlayerJoin : MonoBehaviour {
             prevStates[i] = state[i];
             state[i] = GamePad.GetState((PlayerIndex)i);
 
-            if (state[i].IsConnected)
+            if (!isConnected[i] && state[i].IsConnected)
             {
-                // Check for start
-                if (controllersJoined[i])
-                {
-                    if (prevStates[i].Buttons.A == ButtonState.Pressed && state[i].Buttons.A == ButtonState.Released)
-                    {
-                        playersReady[i] = !playersReady[i];
-                    }
-                }
+                isConnected[i] = true;
+                playersJoined.Add(i);
 
-                // Check if joined
-                if (prevStates[i].Buttons.Start == ButtonState.Pressed && state[i].Buttons.Start == ButtonState.Released)
-                {
-                    if(!controllersJoined[i]) { 
-                        playersJoined.Add(i);
-                        controllersJoined[i] = true;
-                    }
-                    else if(controllersJoined[i])
-                    {
-                        playersJoined.Remove(i);
-                        controllersJoined[i] = false;
-                    }
-                }
+                characters[i].gameObject.SetActive(true);
+                characters[i].enabled = true;
+                characters[i].playerIndex = (PlayerIndex)i;
+
+                controllersJoined[i] = true;
+
+            }else if(isConnected[i] && !state[i].IsConnected){
+                isConnected[i] = false;
+                characters[i].gameObject.SetActive(false);
+                characters[i].enabled = false;
+                playersJoined.Remove(i);
+                controllersJoined[i] = false;
 
             }
-        }
-
-        bool allPlayersReady = true;
-        for (int i = 0; i < playersJoined.Count; i++)
-        {
-            if(!playersReady[i])
-            {
-                allPlayersReady = false;
-            }
-        }
-
-        if (allPlayersReady)
-            StartGame();
-    }
-
-    void StartGame()
-    {
-        for(int i = 0; i < playersJoined.Count;i++)
-        {
-            Debug.Log("PLAYER " + i + " IS CONTROLLER " + playersJoined[i]);
-            characters[i].playerIndex = (PlayerIndex)playersJoined[i];
-        }
-
-        gameObject.SetActive(false);
-    }
-
-    void OnDisable()
-    {
-        for (int i = 0; i < playersJoined.Count; i++)
-        {
-            characters[i].enabled = true;
-        }
-    }
-
-    void OnEnable()
-    {
-        for (int i = 0; i < playersJoined.Count; i++)
-        {
-            characters[i].enabled = false;
         }
     }
 }
