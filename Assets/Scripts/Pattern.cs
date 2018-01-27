@@ -103,6 +103,7 @@ public class Pattern : MonoBehaviour {
 
 		if (currentCheckPosition == patternSize)
 		{
+			GenerateNewPattern();
 			currentCheckPosition = 0;
 			waitingForValue = false;
 			GameEventHandler.TriggerEvent(GameEvent.PatternSuccess, patternArgument);
