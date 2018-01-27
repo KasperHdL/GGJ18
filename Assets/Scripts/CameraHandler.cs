@@ -22,7 +22,7 @@ public class CameraHandler : MonoBehaviour {
 	public float maxCameraMovement;
 	public float planeMovementMultiplier;
 
-	private bool startHasRun = false;
+	public bool startHasRun = false;
 
 	private Character[] characters;
 
@@ -35,15 +35,15 @@ public class CameraHandler : MonoBehaviour {
 
 	public void GameStarted(GameEventArgs eventArgs){
 		if(startHasRun) return;
-		startHasRun = true;
 
 		StartCoroutine(LerpToGame(startDuration));
+		GameEventHandler.Unsubscribe(GameEvent.GameStarted, GameStarted);
 
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if(startHasRun) return;
+		if(!startHasRun) return;
 
 		Vector3 sum = Vector3.zero;
 
@@ -53,8 +53,6 @@ public class CameraHandler : MonoBehaviour {
 		}
 
 		sum *= planeMovementMultiplier;
-
-
 		sum.y = 0;
 
 
@@ -78,8 +76,8 @@ public class CameraHandler : MonoBehaviour {
 			desired = desired.normalized * maxCameraMovement;
 		}
 
-//		transform.position += desired * Time.deltaTime;
-	transform.position = sum;
+		transform.position += desired * Time.deltaTime;
+//		transform.position = sum;
 	}
 
 	IEnumerator LerpToGame(float duration){
@@ -107,6 +105,6 @@ public class CameraHandler : MonoBehaviour {
 
 		//delay
 		yield return new WaitForSeconds(.1f);
-		startHasRun = false;
+		startHasRun = true;
 	}
 }
