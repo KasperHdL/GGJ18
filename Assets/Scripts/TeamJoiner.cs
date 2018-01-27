@@ -13,16 +13,21 @@ public class TeamJoiner : MonoBehaviour {
 
 	private int numPlayers;
 
+
 	// Use this for initialization
 	void Start () {
 		gameHandler = GameHandler.instance;
 		missingPlayers.text = 2-numPlayers + " Players Missing";
 		
+		GameEventHandler.Subscribe(GameEvent.GameStarted, GameStarted);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	public void GameStarted(GameEventArgs eventArgs){
+		GameEventHandler.Unsubscribe(GameEvent.GameStarted, GameStarted);
+		Collider c = GetComponent<Collider>();
+
+		Destroy(c);
+		Destroy(this);
 	}
 
 	void OnTriggerEnter(Collider coll){

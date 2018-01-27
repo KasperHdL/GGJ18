@@ -78,7 +78,7 @@ public class GameHandler : MonoBehaviour {
 		countdownText.enabled = false; 
 
 		for(int i = 0; i < characters.Length; i++){
-			if(!characters[i].gameObject.active)continue;
+			if(!characters[i].gameObject.activeSelf) continue;
 
 			int index = (int) characters[i].roverType;
 
@@ -97,6 +97,8 @@ public class GameHandler : MonoBehaviour {
 			teams[i].gameObject.SetActive(true);
 			teams[i].teamID = i;
 		}
+
+		GameEventHandler.TriggerEvent(GameEvent.GameStarted);
 	}
 
 }

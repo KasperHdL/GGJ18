@@ -7,5 +7,6 @@
     SignalEnter,
     SignalExit,
     BeamDisrupted,
+    GameStarted,
     Count,
 }
