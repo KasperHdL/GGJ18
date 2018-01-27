@@ -12,18 +12,8 @@ public class Team : MonoBehaviour {
 	public Pattern pattern;
 	public Beam beam;
 
-	[Range(0.01f, 1.0f)]
-	public float inputMargin;
-	
-	private float inputTimeStamp;
-	private bool readyForInput;
-
 	private bool left;
 	private bool right;
-	private bool leftSet;
-	private bool rightSet;
-
-	private float playerDistance;
 
 	void Start()
 	{
@@ -47,18 +37,17 @@ public class Team : MonoBehaviour {
 	{
 		CheckSenderInput();
 
-		if (beam.disrupted)
+		if (Input.GetKeyDown(KeyCode.A))
 		{
-			CheckPatternStart();
-
+			pattern.StartPlayPatternCoroutine();
 		}
-		else
+
+		RaycastHit hit;
+		if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
 		{
-			RaycastHit hit;
-			if(Physics.Linecast(receiver.transform.position,sender.transform.position,out hit)){
-				if(!hit.transform.tag.Equals("Team"+teamID)||hit.distance<beam.minDist||hit.distance>beam.maxDist){
-					FAIL();
-				}
+			if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
+			{
+				FAIL();
 			}
 		}
 	}
@@ -102,8 +91,6 @@ public class Team : MonoBehaviour {
 	{
 		int randomNum = Random.Range(0, 100);
 
-		Debug.Log(randomNum);
-
 		if (randomNum >= threshhold)
 		{
 			Character temp = sender;
@@ -125,36 +112,6 @@ public class Team : MonoBehaviour {
 		if (beam.disrupted)
 		{
 			beam.enable();
-		} 
-		else 
-		{
-			pattern.IncreaseIntensity();
-		}
-		
-		StartCoroutine(WaitToStartPattern());
-	}
-
-	private IEnumerator WaitToStartPattern()
-	{
-		Debug.Log("Waiting");
-
-		yield return new WaitForSeconds(pattern.timeBetweenNotes);
-
-		if (!beam.disrupted && !pattern.isPlayingPattern)
-		{
-			pattern.StartPlayPatternCoroutine();
-		}
-	}
-
-	public void CheckPatternStart()
-	{
-		if (!pattern.isPlayingPattern)
-		{
-			playerDistance = Vector3.Distance(receiver.transform.position, sender.transform.position);
-			if (playerDistance > beam.minDist && playerDistance < beam.maxDist)
-			{
-				pattern.StartPlayPatternCoroutine();
-			}
 		}
 	}
 
@@ -180,56 +137,32 @@ public class Team : MonoBehaviour {
 
 	public void CheckSenderInput()
 	{
-		if (!leftSet)
+		if (sender.state.Buttons.LeftShoulder == ButtonState.Pressed && sender.prevState.Buttons.LeftShoulder == ButtonState.Released)
 		{
-			left = sender.state.Buttons.LeftShoulder == ButtonState.Pressed;
+			left = true;
 		}
-		if (!rightSet)
+		
+		if (sender.state.Buttons.RightShoulder == ButtonState.Pressed && sender.prevState.Buttons.RightShoulder == ButtonState.Released)
 		{
-			right = sender.state.Buttons.RightShoulder == ButtonState.Pressed;
+			right = true;
 		}
-
-		if (!leftSet && left)
+		InputValues inputValues = new InputValues();
+		
+		if (left)
 		{
-			leftSet = true;
+			inputValues = InputValues.Left;
 		}
-
-		if (!rightSet && right)
+		else if (right)
 		{
-			rightSet = true;
-		}
-
-		if (!readyForInput &&
-			((sender.prevState.Buttons.LeftShoulder == ButtonState.Released && left && (sender.prevState.Buttons.RightShoulder == ButtonState.Released || !right)) || 
-			(sender.prevState.Buttons.RightShoulder == ButtonState.Released && right && (sender.prevState.Buttons.LeftShoulder == ButtonState.Released || !left))))
-		{
-			readyForInput = true;
-			inputTimeStamp = Time.time + inputMargin;
+			inputValues = InputValues.Right;
 		}
 
-		if (readyForInput && Time.time > inputTimeStamp)
+		if (left || right)
 		{
-			Debug.Log("Left: " + left + " Right: " + right);
-			InputValues inputValues = InputValues.Count;
-			
-			if (left && right)
-			{
-				inputValues = InputValues.Both;
-			}
-			else if (left)
-			{
-				inputValues = InputValues.Left;
-			}
-			else if (right)
-			{
-				inputValues = InputValues.Right;
-			}
-
 			SendInputToPattern(inputValues);
-			readyForInput = false;
 
-			leftSet = false;
-			rightSet = false;
+			right = false;
+			left = false;
 		}
 	}
 }

@@ -10,8 +10,6 @@ public class Beam : MonoBehaviour {
 	public GameObject player2;
 	
 	public float minDist;
-	public float maxDist;
-	public float middleDist;
 	public bool disrupted;
 	
 	private Color currentColor;
@@ -27,8 +25,7 @@ public class Beam : MonoBehaviour {
 		line.GetComponent<Renderer>().sharedMaterial = lineMaterial;
 		currentColor = Color.black;
 		disrupted = true;
-		distrupt();
-		middleDist = maxDist + (minDist - maxDist) / 2;
+		enable();
 	}
 
 	private float distruptTimer = 0f;
@@ -37,15 +34,8 @@ public class Beam : MonoBehaviour {
 
 	void Update () {
 		dist = Vector3.Distance(player1.transform.position,player2.transform.position);
-		if(dist<middleDist){
-			//closests to mindist
-			currentColor = Color.Lerp(enabledColor,distruptColor,minDist/dist);
-		}else if(dist>middleDist){
-			//closests to max dist
-			currentColor = Color.Lerp(enabledColor,distruptColor,dist/maxDist);
-		}else{
-			currentColor = enabledColor;
-		}
+
+		currentColor = Color.Lerp(enabledColor,distruptColor,minDist/dist);
 
 		Debug.DrawLine(player1.transform.position,player2.transform.position,currentColor,Time.deltaTime);
 		line.SetPosition(0,player1.transform.position);

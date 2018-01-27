@@ -373,6 +373,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1357515262572310, guid: b80d91b367aedc44cbb7480a34be244b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b80d91b367aedc44cbb7480a34be244b, type: 2}
   m_IsPrefabParent: 0
@@ -600,7 +604,6 @@ MonoBehaviour:
   sender: {fileID: 493616963}
   pattern: {fileID: 1278885791}
   beam: {fileID: 1278885790}
-  inputMargin: 0.1
 --- !u!4 &1278885793
 Transform:
   m_ObjectHideFlags: 0
@@ -753,7 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamID: 0
-  timeBetweenNotes: 5
+  timeBetweenNotes: 1
   patternSize: 3
   intensityIncreasePercentage: 0.1
   isPlayingPattern: 0
@@ -773,7 +776,6 @@ MonoBehaviour:
   sender: {fileID: 1466014283}
   pattern: {fileID: 1451111131}
   beam: {fileID: 1451111130}
-  inputMargin: 0.52
 --- !u!4 &1451111133
 Transform:
   m_ObjectHideFlags: 0
