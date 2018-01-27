@@ -93,6 +93,7 @@ public class Character : MonoBehaviour {
 
                 Debug.DrawRay(wheels[i].transform.position + 0.5f * Vector3.up, steering3.normalized, Color.green);
             }else{
+                bool drivingBackwards = dir < 0;
                 dir = backWheelForce.Evaluate(dir);
             }
 
