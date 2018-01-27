@@ -10,22 +10,26 @@ public class Character : MonoBehaviour {
         Right,
     }
 
+    public Vector2 steering;
+
+    [Header("Controller Settings")]
     public bool use_keyboard = false;
+
     public PlayerIndex playerIndex;
     public Thumbstick thumbstick;
-
-
-    public float moveForce;
-
-    public Vector2 steering;
 
     public GamePadState state;
     public GamePadState prevState;
 
+
+    [Header("Character Settings")]
+    public float moveForce;
+
+
     [HideInInspector] public Rigidbody body;
+
 	void Start () {
         body = GetComponent<Rigidbody>();
-		
 	}
 	
 	void Update () {
@@ -48,7 +52,6 @@ public class Character : MonoBehaviour {
 
         Vector3 move = Vector3.right * steering.x + Vector3.forward * steering.y;
         body.AddForce(move * Time.deltaTime * moveForce);
-
 		
 	}
 }
