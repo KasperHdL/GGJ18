@@ -77,8 +77,9 @@ public class GameHandler : MonoBehaviour {
 		gameIsStarted = true;
 		countdownText.enabled = false; 
 
-		int i = -1;
-		while(i++ < 100){
+		for(int i = 0; i < characters.Length; i++){
+			if(!characters[i].gameObject.active)continue;
+
 			int index = (int) characters[i].roverType;
 
 			if(teams[index].receiver == null){
@@ -88,11 +89,13 @@ public class GameHandler : MonoBehaviour {
 
 			if(teams[index].sender == null){
 				teams[index].sender = characters[i];
-				continue;
 			}
 
-			teams[index].enabled = true;
-			teams[index].teamID = index;
+		}
+
+		for(int i = 0; i < teams.Length; i++){
+			teams[i].gameObject.SetActive(true);
+			teams[i].teamID = i;
 		}
 	}
 
