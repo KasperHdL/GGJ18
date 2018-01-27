@@ -20,11 +20,8 @@ public class Character : MonoBehaviour {
 
     [HideInInspector] public RoverType roverType;
 
-<<<<<<< HEAD
     [HideInInspector] public bool noControl;
-=======
     private SignalArgument signalArgument = new SignalArgument();
->>>>>>> signal setup
 
     public Vector2 steering;
 
