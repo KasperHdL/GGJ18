@@ -5,7 +5,6 @@ using XInputDotNetPure;
 
 public class PlayerJoin : MonoBehaviour {
     public bool[] controllersJoined;        // 0 = first controller, 1 = second controller, etc.
-    public bool[] playersReady;
     private bool[] isConnected = {false};
     public List<int> playersJoined;        // if [0] = 1, then first player equals second controller, if [1] = 3 then second player equals fourth controller, etc.
 
@@ -18,7 +17,6 @@ public class PlayerJoin : MonoBehaviour {
     void Start () {
         playersJoined = new List<int>();
         controllersJoined = new bool[4];
-        playersReady = new bool[4];
         isConnected = new bool[4];
         state = new GamePadState[4];
         prevStates = new GamePadState[4];
