@@ -2,6 +2,5 @@
 {
 	Left,
 	Right,
-	Both,
 	Count
 }
