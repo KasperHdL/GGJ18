@@ -26,7 +26,7 @@ public class Music : MonoBehaviour
 
         ambienceSource.Play();
 
-        StartCoroutine(DelayedStart());
+        StartCoroutine(DelayedAccentStart());
         StartCoroutine(AmbienceVolume());
 
         GameEventHandler.Subscribe(GameEvent.GameStarted, OnGameStarted);
@@ -57,11 +57,9 @@ public class Music : MonoBehaviour
         }
     }
 
-    IEnumerator DelayedStart()
+    IEnumerator DelayedAccentStart()
     {
-        Debug.Log("READY");
         yield return new WaitForSeconds(12.366f);
-        Debug.Log("START");
 
         accentSource.Play();
     }
