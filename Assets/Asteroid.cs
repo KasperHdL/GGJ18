@@ -5,7 +5,7 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour {
     public Mesh[] meshes;
 
-    public ParticleSystem ps; 
+    public ParticleSystem trailEffect, impactEffect; 
     private Rigidbody rb;
     public float asteroidSinkFactor;
 
@@ -29,7 +29,8 @@ public class Asteroid : MonoBehaviour {
     public void Impact(){
         //Impact particle system and stuff
 
-        ps.gameObject.SetActive(false);
+        trailEffect.gameObject.SetActive(false);
+        impactEffect.Play();
         rb.isKinematic = true;
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-asteroidSinkFactor, this.transform.position.z);
     }
