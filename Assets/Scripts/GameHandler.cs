@@ -33,6 +33,7 @@ public class GameHandler : MonoBehaviour {
 			return;
 		}
 		instance = this;
+		GameEventHandler.Initialize();
 	}
 
 	public void Start(){

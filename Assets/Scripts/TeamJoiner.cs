@@ -48,7 +48,7 @@ public class TeamJoiner : MonoBehaviour {
 		}
 		missingPlayers.text = 2-numPlayers + " Players Missing";
 
-		gameHandler.UpdatePlayerForTeam(teamType, numPlayers);
+		GameHandler.instance.UpdatePlayerForTeam(teamType, numPlayers);
 	}
 
 	void OnTriggerEnter(Collider coll){
