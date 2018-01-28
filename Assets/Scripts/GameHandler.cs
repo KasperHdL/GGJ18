@@ -10,10 +10,12 @@ public class GameHandler : MonoBehaviour {
 	public Team[] teams;
 	public Text countdownText;
 	public IncomingSignalSpawner signalSpawner;
+	public GameObject introColliders;
 
 
 	private Character[] characters;
 	private int[] numPlayersOnTeam;
+
 
 
 
@@ -80,6 +82,8 @@ public class GameHandler : MonoBehaviour {
 		countdownText.enabled = false; 
 		signalSpawner.enabled = true;
 
+		Destroy(introColliders);
+
 		for(int i = 0; i < characters.Length; i++){
 			if(!characters[i].gameObject.activeSelf) continue;
 
@@ -100,8 +104,8 @@ public class GameHandler : MonoBehaviour {
 			teams[i].gameObject.SetActive(true);
 			teams[i].teamID = i;
 		}
-
 		GameEventHandler.TriggerEvent(GameEvent.GameStarted);
+
 	}
 
 }

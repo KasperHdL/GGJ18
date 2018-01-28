@@ -138,7 +138,7 @@ public class Character : MonoBehaviour {
                 Debug.DrawRay(wheels[i].transform.position + 0.5f * Vector3.up, steering3.normalized, Color.green);
             }else{
                 bool drivingBackwards = dir < 0;
-                dir = settings.backWheelForce.Evaluate(dir) * (drivingBackwards ? 0: 1);
+                dir = settings.backWheelForce.Evaluate(dir) ;
             }
 
             if(!onGround)continue;

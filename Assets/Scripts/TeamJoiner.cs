@@ -23,11 +23,14 @@ public class TeamJoiner : MonoBehaviour {
 	}
 	
 	public void GameStarted(GameEventArgs eventArgs){
-		GameEventHandler.Unsubscribe(GameEvent.GameStarted, GameStarted);
 		Collider c = GetComponent<Collider>();
 
 		Destroy(c);
 		Destroy(this);
+		missingPlayers.enabled = false;
+		
+
+		GameEventHandler.Unsubscribe(GameEvent.GameStarted, GameStarted);
 	}
 
 	void OnTriggerEnter(Collider coll){

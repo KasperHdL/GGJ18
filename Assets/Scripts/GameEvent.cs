@@ -8,5 +8,6 @@
     SignalExit,
     BeamDisrupted,
     GameStarted,
+    GameOver,
     Count,
 }

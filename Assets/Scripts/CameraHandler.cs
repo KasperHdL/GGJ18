@@ -57,6 +57,9 @@ public class CameraHandler : MonoBehaviour {
 		}
 
 		sum.y = 0;
+
+		if(activePlayers == 0)activePlayers = 1;
+
 		sum /= activePlayers;
 
 

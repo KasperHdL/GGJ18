@@ -14,7 +14,7 @@ MonoBehaviour:
   moveForce: 400
   innerOuterDeadzone: 0.15
   wheelIsInnerForce: 0.8
-  wheelIsOuterForce: 1.4
+  wheelIsOuterForce: 1.2
   wheelStraightForce: 1.25
   reverseMaxDot: -0.7
   reverseOffset: 1
@@ -39,6 +39,18 @@ MonoBehaviour:
   backWheelForce:
     serializedVersion: 2
     m_Curve:
+    - serializedVersion: 2
+      time: -0.49575365
+      value: -0.50197506
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: -0.19917221
+      value: 0.0056947153
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     - serializedVersion: 2
       time: 0.0008735657
       value: 0.6937485

@@ -21,6 +21,11 @@ public class Team : MonoBehaviour {
 
 	void Start()
 	{
+
+		if(receiver == null || sender == null){
+			gameObject.SetActive(false);
+		}
+
 		GameEventHandler.Subscribe(GameEvent.Rumble, SendVibration);
 		GameEventHandler.Subscribe(GameEvent.PatternSuccess, PatternCompletion);
 		GameEventHandler.Subscribe(GameEvent.PatternFailure, PatternFailure);
@@ -31,8 +36,6 @@ public class Team : MonoBehaviour {
 		
 		pattern.Initialize();
 
-		beam.player1 = receiver.gameObject;
-		beam.player2 = sender.gameObject;
 
 		PlayerSwap(50);
         GameEventHandler.Subscribe(GameEvent.SignalEnter, SetReceiverSender);
