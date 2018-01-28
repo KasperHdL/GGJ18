@@ -1,0 +1,123 @@
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+Random Asteroid Mesh w/ particles
+stuff i forgot
+stuff again
+Final Scene setup
+stuff i dont quite recall
+removed debug.logs
+prefab and scene
+camera is actually nice again
+camera is nice again
+camera and disable flags
+Merging Frans' stuff
+All the logics
+SignalLogic
+fucking *@3@$!
+Merged stuff
+Collider to DISABLE PEOPLE
+VCR font, made grid world space (make it BLOOMY AND BLURRY)
+game start tweak
+tweak
+rover visuals was missing ?
+rover tweaks
+rover can reverse
+Target Signal
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+Acknowledge effect
+Merge branch 'IncomingSignalLogic'
+Fixed layermask stuff
+Merge branch 'master' into IncomingSignalLogic
+save scene
+Incoming signal with spawner and stuff
+Merge branch 'MajorRedux'
+Patterns are given at once, with a small delay between notes
+KINOTUBE
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+PP MAN
+Fixed beam coloring!
+tags changed name
+some ui and some start game logic
+forgot to setup Setup
+Setup scene with beam update, and new rover prefab
+Particle feedback on correct note
+Bunch of mat stuff
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+Merge remote-tracking branch 'origin/master'
+Flags, Crater, SPRITE
+Beam color based on distance, and disrupt if something is in front
+disabled rovers at start until controller is found for them
+team switching when close to flag
+wheel rotation fix
+rover tweak scene fix
+decoupled visuals of rovers from the mechanical rover
+Setup for four players
+Crater
+Rovermat fix
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+HARD. ROCK. HALLUJA
+player tags
+chinese rover
+made SO for rover settings
+Merge remote-tracking branch 'origin/master'
+Setting up for four players
+Merge remote-tracking branch 'origin/connectingFeatures'
+Merge branch 'connectingFeatures'
+Setting up for 2 teams
+Merge remote-tracking branch 'origin/connectingFeatures'
+automatic player join
+swapping players, and randomizing pattern also works.
+Fixed some materials
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+Chinese rover
+Pretty Much Everything
+deleted fill files
+scene
+wheels rotate
+more reasonable reverse
+simple rover recovery flip
+rover controller tweak
+rover control tweak
+sorta done with the drone control
+character wip
+Merge branch 'master' into character_control
+RUssian Rover
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+Terrain Test, Reference
+Merge branch 'master' into connectingFeatures
+Merge branch 'character_control'
+event system
+WIP team script
+cleanup in pattern script
+Merge branch 'Beam'
+Merge branch 'master' into Beam
+Updated the colors of the beam
+Updated the beam thingy
+Forgot sceneneee
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+cleaning
+Charahter controller now works with Joining
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+Some brutal join function
+Merge branch 'Beam'
+states public
+character can be set to use left or right thumbstick
+Merge branch 'feature-pattern'
+Merge branch 'master' into feature-pattern
+Pattern script
+Merge branch 'character_control'
+tweaks and sphere to play around with
+Merge branch 'character_control'
+character control with controller
+Merge branch 'master' into Beam
+Initialized the beam and prefab shitty!
+Merge branch 'master' into character_control
+Merge branch 'master' of github.com:KasperHdL/GGJ18
+Merge branch 'character_control'
+basic control
+Merge branch 'master' of https://github.com/KasperHdL/GGJ18
+something that only works on windows (xinput)
+empty character
+META
+FiALSD
+Added bunch of OFALDERS
+init
