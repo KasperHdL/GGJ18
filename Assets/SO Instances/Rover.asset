@@ -16,7 +16,7 @@ MonoBehaviour:
   wheelIsInnerForce: 0.8
   wheelIsOuterForce: 1.2
   wheelStraightForce: 1.25
-  reverseMaxDot: -0.7
+  reverseMaxDot: -1
   reverseOffset: 1
   frontWheelForce:
     serializedVersion: 2
@@ -40,14 +40,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: -0.49575365
-      value: -0.50197506
+      time: -0.99952257
+      value: -0.97207546
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: -0.19917221
-      value: 0.0056947153
+      time: -0.69932365
+      value: 0.004688073
+      inSlope: 7.377565
+      outSlope: 7.377565
+      tangentMode: 0
+    - serializedVersion: 2
+      time: -0.69845355
+      value: 0.54227805
       inSlope: 0
       outSlope: 0
       tangentMode: 0

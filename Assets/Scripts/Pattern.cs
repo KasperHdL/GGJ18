@@ -22,6 +22,7 @@ public class Pattern : MonoBehaviour {
 
 	private bool waitingForValue;
 	private bool correctInput;
+	private bool stopPatternPlayback = false;
 	
 	private RumbleArgs rumbleArgument = new RumbleArgs();
 	private PatternArgs patternArgument = new PatternArgs();
@@ -31,8 +32,14 @@ public class Pattern : MonoBehaviour {
 		GameEventHandler.Subscribe(GameEvent.SignalExit,StopPatternPlayback);
 		GameEventHandler.Subscribe(GameEvent.SignalEnter,StartPatternPlayback);
 	}
-	bool stopPatternPlayback = false;
+
 	private void StopPatternPlayback(GameEventArgs argument){
+		SignalArgument signal = (SignalArgument) argument;
+		if(signal.teamID != teamID)
+		{
+			return;
+		}
+
 		stopPatternPlayback = true;
 	}
 	private void StartPatternPlayback(GameEventArgs argument){
@@ -118,24 +125,28 @@ public class Pattern : MonoBehaviour {
 
 	public void StartPlayPatternCoroutine()
 	{
+		StopAllCoroutines();
 		StartCoroutine(PlayPattern());
+	}
+	public void StopPatternCoroutine()
+	{
+		waitingForValue = false;
+		isPlayingPattern = false;
+		correctInput = false;
+
+		StopAllCoroutines();
 	}
 
 	public IEnumerator PlayPattern()
 	{
-		Debug.Log("Pattern Coroutine Started");
 		isPlayingPattern = true;
 		waitingForValue = true;
-		
+
+			
 		int currentPositionInPattern = 0;
 
 		while(currentPositionInPattern < patternSize)
 		{
-			if(stopPatternPlayback){
-				waitingForValue = false;
-				break;
-			}
-
 			// SEND VIBRATION INFORMATION
 			CallVibration(currentPattern[currentPositionInPattern]);
 			
@@ -144,11 +155,6 @@ public class Pattern : MonoBehaviour {
 			// PREPARE FOR NEXT NUMBER
 			currentPositionInPattern ++;
 			correctInput = false;
-
-			if(stopPatternPlayback){
-				waitingForValue = false;
-				break;
-			}
 		}
 
 		isPlayingPattern = false;

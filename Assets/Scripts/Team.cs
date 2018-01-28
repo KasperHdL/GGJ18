@@ -12,27 +12,26 @@ public class Team : MonoBehaviour {
 	public Pattern pattern;
 	public Beam beam;
 
+	public Collider beamCollider;
+	
 	public AnimationCurve pushForceCurve;
 	public float forceMultiplier;
-
-	public float patternIntervals = 2.0f;
-
+	
 	public float noDisruptDelay;
 	private float beamStartedTime = -1;
 
-	private bool hasSignal;
+	public float patternIntervals = 2.0f;
+
+	public bool hasSignal;
 	private bool left;
 	private bool right;
 	private bool playerFound;
-
-
 
 	void Start()
 	{
 
 		if(receiver == null || sender == null){
 			gameObject.SetActive(false);
-			return;
 		}
 
 		beam.player1 = receiver.gameObject;
@@ -61,16 +60,16 @@ public class Team : MonoBehaviour {
 		if (!beam.disrupted)
 		{
 			RaycastHit hit;
-			if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
-			{
-				if(!hit.transform.tag.Equals("Team"+teamID) || (hit.distance < beam.minDist && beamStartedTime + noDisruptDelay < Time.time))
-				{
-					FAIL();
-					if(hit.transform.tag.Equals("Asteroid")){
-						hit.transform.GetComponent<Asteroid>().Explode();
-					}
-				}
-			}
+			Vector3 playerDifference = (receiver.transform.position - sender.transform.position);
+			Vector3 centerpoint = sender.transform.position + playerDifference/2;
+
+			beamCollider.transform.position = centerpoint;
+			beamCollider.transform.localScale = new Vector3(1,50,playerDifference.magnitude);
+			beamCollider.transform.rotation = Quaternion.LookRotation(playerDifference);
+
+			if(playerDifference.magnitude < beam.minDist && beamStartedTime + noDisruptDelay < Time.time)
+				FAIL();
+
 		}
 	}
 
@@ -78,12 +77,13 @@ public class Team : MonoBehaviour {
 	{
 		SignalArgument signalArgument = (SignalArgument)arguments;
 
-		if (!playerFound)
+		if (signalArgument.teamID == teamID)
 		{
-			return;
+			hasSignal = false;
+			
+			pattern.StopPatternCoroutine();
+			StopAllCoroutines();
 		}
-
-		hasSignal = false;
 	}
 
     public void SetReceiverSender(GameEventArgs arguments)
@@ -102,6 +102,7 @@ public class Team : MonoBehaviour {
 
 		if (playerFound)
 		{
+			StopAllCoroutines();
 			StartCoroutine(RepeatedPlayback());
 		}
 	}
@@ -150,17 +151,18 @@ public class Team : MonoBehaviour {
 		{
 			return;
 		}
+		hasSignal = false;
 	}
 
 	public void FAIL(){
 		GameEventHandler.TriggerEvent(GameEvent.BeamDisrupted);
 		beam.distrupt();
 
+		beamCollider.enabled = false;
+
 		PlayerSwap(0);
 
 		pattern.ResetIntensity();
-
-		beamStartedTime = -1;
 	}
 
 	public void PlayerSwap(int threshhold)
@@ -185,12 +187,14 @@ public class Team : MonoBehaviour {
 			return;
 		}
 
+		beamCollider.enabled = true;
+
+
 		if (beam.disrupted)
 		{
 			beam.enable();
 			hasSignal = false;
 		}
-
 		//Push everyone
 		Vector3 recPos = receiver.transform.position;
 		Character[] chars = GameHandler.instance.playerJoin.characters;
@@ -204,7 +208,6 @@ public class Team : MonoBehaviour {
 		}
 
 		beamStartedTime = Time.time;
-
 	}
 
 	public void SendInputToPattern(InputValues inputValue)

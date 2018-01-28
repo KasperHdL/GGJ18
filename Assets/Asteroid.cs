@@ -23,8 +23,11 @@ public class Asteroid : MonoBehaviour {
 	}
 
     public void Explode(){
-        //explode particle and stuff
-
+        StartCoroutine(Exploder());
+    }
+    private IEnumerator Exploder(){
+        impactEffect.Play();
+        yield return new WaitForSeconds(impactEffect.main.startLifetime.constant);
         Destroy(this.gameObject);
     }
 
@@ -51,6 +54,16 @@ public class Asteroid : MonoBehaviour {
         if(other.transform.tag.Equals("Asteroid")){
             this.Explode();
             other.gameObject.GetComponent<Asteroid>().Explode();
+        }
+    }
+    /// <summary>
+    /// OnTriggerEnter is called when the Collider other enters the trigger.
+    /// </summary>
+    /// <param name="other">The other Collider involved in this collision.</param>
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag.Equals("SignalZone")){
+            this.Explode();
         }
     }
 }

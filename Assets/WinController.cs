@@ -37,7 +37,9 @@ public class WinController : MonoBehaviour {
 	public Transform roverLosePos1;
 	public Transform roverLosePos2;
 	[Header("Variables")]
-	public float camSpeed;
+	public float camSpeed = 0.25f;
+	public float scaleAmount = 5f;
+	public float scaleSpeed = 0.01f;
 
 	private Character[] rovers;
 	public void WIN(GameEventArgs args){
@@ -67,14 +69,23 @@ public class WinController : MonoBehaviour {
 			}
 		}
 		if(winArgs.teamID == 0){
-			chinaFlag.transform.eulerAngles = new Vector3(chinaFlag.transform.eulerAngles.x,chinaFlag.transform.eulerAngles.y,85f);
-			chinaFlag.transform.position = new Vector3(chinaFlag.transform.position.x,chinaFlag.transform.position.y-2f,chinaFlag.transform.position.z);
+			chinaFlag.SetActive(false);
+			StartCoroutine(Enlager(russianFlag.transform));
+			
 		}else{
-			russianFlag.transform.eulerAngles = new Vector3(russianFlag.transform.eulerAngles.x,russianFlag.transform.eulerAngles.y,-80f);
-			russianFlag.transform.position = new Vector3(russianFlag.transform.position.x,russianFlag.transform.position.y-2.5f,russianFlag.transform.position.z);
+			russianFlag.SetActive(false);
+			StartCoroutine(Enlager(chinaFlag.transform));
 		}
 		mainCamera.GetComponent<CameraHandler>().enabled = false;
 		StartCoroutine(MoveCamera());
+	}
+	private IEnumerator Enlager(Transform flag){
+		yield return new WaitForSeconds(2);
+		Vector3 temp = new Vector3(scaleAmount,scaleAmount,scaleAmount);
+		while(flag.localScale!=temp){
+			flag.localScale = Vector3.MoveTowards(flag.localScale,temp,scaleSpeed);
+			yield return new WaitForEndOfFrame();
+		}
 	}
 	private IEnumerator MoveCamera(){
 		while(mainCamera.transform.position!=winCamPos.position||mainCamera.transform.rotation!=winCamPos.rotation){

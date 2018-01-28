@@ -51,6 +51,8 @@ public class Character : MonoBehaviour {
     public Transform[] wheels;
     public RoverVisuals[] visuals;
 
+    public bool isWithinSignal;
+
     [HideInInspector] public Rigidbody body;
 
 
@@ -226,6 +228,8 @@ public class Character : MonoBehaviour {
     {
         if (other.tag.Equals("SignalZone"))
         {
+            isWithinSignal = true;
+            signalArgument.teamID = (int) roverType;
             GameEventHandler.TriggerEvent(GameEvent.SignalEnter, signalArgument);
         }
     }
@@ -234,6 +238,8 @@ public class Character : MonoBehaviour {
     {
         if (other.tag.Equals("SignalZone"))
         {
+            isWithinSignal = false;
+            signalArgument.teamID = (int) roverType;
             GameEventHandler.TriggerEvent(GameEvent.SignalExit, signalArgument);
         }
     }
