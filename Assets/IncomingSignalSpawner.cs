@@ -30,7 +30,6 @@ public class IncomingSignalSpawner : MonoBehaviour {
 	}
 
 	private void startSpawning(){
-		Debug.Log("hello");
 		StartCoroutine(Spawn());
 	}
 	private void stopSpawning(GameEventArgs args){

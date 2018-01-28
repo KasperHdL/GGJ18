@@ -53,6 +53,9 @@ public class Character : MonoBehaviour {
 
     public bool isWithinSignal;
 
+    private float nextFlipAllowed;
+    private float nextFlipDelay = 1f;
+
     [HideInInspector] public Rigidbody body;
 
 
@@ -192,8 +195,11 @@ public class Character : MonoBehaviour {
         }
 
         if(state.Buttons.Back == ButtonState.Pressed && prevState.Buttons.Back == ButtonState.Released){
-            transform.rotation = Quaternion.Euler(0,0,0);
-            transform.position += Vector3.up;
+            if(nextFlipAllowed < Time.time){
+                nextFlipAllowed = Time.time + nextFlipDelay;
+                transform.rotation = Quaternion.Euler(0,0,0);
+                transform.position += Vector3.up;
+            }
         }
 
         //Visual Wheels

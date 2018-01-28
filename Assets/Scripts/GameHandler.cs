@@ -33,6 +33,7 @@ public class GameHandler : MonoBehaviour {
 			return;
 		}
 		instance = this;
+		DontDestroyOnLoad(gameObject);
 	}
 
 	public void Start(){
@@ -81,7 +82,6 @@ public class GameHandler : MonoBehaviour {
 	public void StartGame(){
 		gameIsStarted = true;
 		countdownText.enabled = false; 
-		signalSpawner.enabled = true;
 
 		Destroy(introColliders);
 
@@ -109,6 +109,7 @@ public class GameHandler : MonoBehaviour {
 		}
 		GameEventHandler.TriggerEvent(GameEvent.GameStarted);
 
+		signalSpawner.enabled = true;
 	}
 
 }

@@ -22,6 +22,6 @@ public class UISounds : MonoBehaviour {
 
     public void OnFail(GameEventArgs args)
     {
-        AudioSource.PlayClipAtPoint(fail, transform.position);
+        AudioSource.PlayClipAtPoint(fail, transform.position, 0.8f);
     }
 }

@@ -19,6 +19,7 @@ public class TopCollider : MonoBehaviour {
         if(other.CompareTag("Team0") || other.CompareTag("Team1"))
         {
             other.GetComponent<Character>().noControl = true;
+            other.GetComponent<Character>().body.AddForce(Vector3.down);
         }
     }
 
