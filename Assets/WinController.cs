@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 
 public class WinController : MonoBehaviour {
 
@@ -25,6 +27,14 @@ public class WinController : MonoBehaviour {
 			args.teamID = 1;
 			GameEventHandler.TriggerEvent(GameEvent.GameOver,args);
 		}
+		if(onWinScreen){
+			rovers = GameHandler.instance.playerJoin.characters;
+			foreach(Character rover in rovers){
+				if(rover.state.Buttons.Start == ButtonState.Pressed){
+					SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+				}
+			}
+		}
 	}
 	[Header("Objects")]
 	public GameObject mainCamera;
@@ -41,13 +51,17 @@ public class WinController : MonoBehaviour {
 	public float scaleAmount = 5f;
 	public float scaleSpeed = 0.01f;
 
+	private bool onWinScreen = false;
+
 	private Character[] rovers;
 	public void WIN(GameEventArgs args){
+		onWinScreen = true;
 		GameOverArgs winArgs = (GameOverArgs)args;
 		rovers = GameHandler.instance.playerJoin.characters;
 		bool winsaved = false;
 		bool losesaved = false;
 		foreach(Character rover in rovers){
+			GamePad.SetVibration(rover.playerIndex, 0, 0);
 			if((int)rover.roverType==winArgs.teamID){
 				if(!winsaved){
 					rover.transform.position = roverWinPos1.transform.position;

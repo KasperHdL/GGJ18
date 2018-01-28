@@ -199,7 +199,38 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 282915ecde337e24c941a434d225e4c1, type: 3}
   trailEffect: {fileID: 198009110686159428}
   impactEffect: {fileID: 198415298240746298}
-  asteroidSinkFactor: 0
+  asteroidSinkFactor: 1
+  pushForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 5.215764
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 10.0549755
+      value: 0.31875008
+      inSlope: -0.088214874
+      outSlope: -0.088214874
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 20.026176
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  forceMultiplier: 50
 --- !u!198 &198009110686159428
 ParticleSystem:
   m_ObjectHideFlags: 1

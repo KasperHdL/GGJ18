@@ -11,6 +11,10 @@ public class Asteroid : MonoBehaviour {
     private Rigidbody rb;
     public float asteroidSinkFactor;
 
+	public AnimationCurve pushForceCurve;
+	public float forceMultiplier;
+
+    private bool hasImpacted = false;
 	
 	void Start () {
         MeshFilter meshFilter = GetComponent<MeshFilter>();
@@ -27,6 +31,7 @@ public class Asteroid : MonoBehaviour {
     }
     private IEnumerator Exploder(){
         impactEffect.Play();
+        GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(impactEffect.main.startLifetime.constant);
         Destroy(this.gameObject);
     }
@@ -39,6 +44,21 @@ public class Asteroid : MonoBehaviour {
         rb.isKinematic = true;
         AudioSource.PlayClipAtPoint(impactSounds[Random.Range(0, impactSounds.Length)], transform.position);      
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-asteroidSinkFactor, this.transform.position.z);
+
+        hasImpacted = true;
+
+		//Push everyone
+		Vector3 recPos = transform.position;
+		Character[] chars = GameHandler.instance.playerJoin.characters;
+
+		for(int i = 0; i < chars.Length;i++){
+            Vector3 delta = chars[i].transform.position - recPos;
+
+            float force = pushForceCurve.Evaluate(delta.magnitude) * forceMultiplier;
+            chars[i].body.AddForce(delta.normalized * force, ForceMode.Impulse);
+		}
+
+
     }
 
     /// <summary>
@@ -48,6 +68,11 @@ public class Asteroid : MonoBehaviour {
     /// <param name="other">The Collision data associated with this collision.</param>
     void OnCollisionEnter(Collision other)
     {
+        if(!hasImpacted){
+            if(other.transform.tag == "Team0" || other.transform.tag == "Team1"){
+                Impact();
+            }
+        }
         if(other.transform.tag.Equals("Ground")){
             Impact();
         }
