@@ -8,8 +8,6 @@ public class Music : MonoBehaviour
 
     private AudioSource ambienceSource, accentSource;
 
-    public bool test;
-
     // Use this for initialization
     void Start()
     {
@@ -32,12 +30,6 @@ public class Music : MonoBehaviour
         StartCoroutine(AmbienceVolume());
 
         GameEventHandler.Subscribe(GameEvent.GameStarted, OnGameStarted);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnGameStarted(GameEventArgs args)
