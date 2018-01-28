@@ -6,25 +6,39 @@ public class IncomingSignalSpawner : MonoBehaviour {
 
 	public GameObject incomingSignalPrefab;
 	public GameObject astroidPrefab;
+	public GameObject asteroidImpactIcon;
 	public float yOffset;
 	public float asteriodSinkage;
-
-	public GameObject asteroidProjector;
-	[Range(0.1f,6f)]
-	public float asteroidProjectorTime;
+	private bool gameover;
+	public float asteriodSpawnFreq = 10;
 	
 	void Start()
 	{
 		SpawnSignal(null);
+		gameover = false;
 
 		GameEventHandler.Subscribe(GameEvent.BeamDisrupted, SpawnSignal);
+		GameEventHandler.Subscribe(GameEvent.GameOver,stopSpawning);
 	}
+
 	/// <summary>
-	/// Update is called every frame, if the MonoBehaviour is enabled.
+	/// This function is called when the object becomes enabled and active.
 	/// </summary>
-	void Update()
+	void OnEnable()
 	{
-		if(Input.GetKeyDown(KeyCode.H)){
+		startSpawning();
+	}
+
+	private void startSpawning(){
+		Debug.Log("hello");
+		StartCoroutine(Spawn());
+	}
+	private void stopSpawning(GameEventArgs args){
+		gameover = true;
+	}
+	private IEnumerator Spawn(){
+		while(!gameover){
+			yield return new WaitForSeconds(asteriodSpawnFreq);
 			SpawnAstroid();
 		}
 	}
@@ -41,14 +55,17 @@ public class IncomingSignalSpawner : MonoBehaviour {
 	public void SpawnAstroid(){
 		GameObject temp = Instantiate(astroidPrefab,RandomPointInBox(this.transform.position,this.transform.localScale),Quaternion.identity);
 		temp.GetComponent<Asteroid>().asteroidSinkFactor = asteriodSinkage;
-		asteroidProjector.transform.position = temp.transform.position;
-		StartCoroutine(AsteroidProjectorTimer());
+		GameObject impactSprite = Instantiate(asteroidImpactIcon,temp.transform.position,asteroidImpactIcon.transform.rotation);
+		RaycastHit hit;
+		if(Physics.Raycast(temp.transform.position,Vector3.down,out hit,Mathf.Infinity,LayerMask.GetMask("Ground"))){
+			impactSprite.transform.position = new Vector3(temp.transform.position.x,hit.point.y+yOffset,temp.transform.position.z);
+		}
+		StartCoroutine(RemoveImpactIcon(impactSprite));
 	}
 
-	private IEnumerator AsteroidProjectorTimer(){
-		asteroidProjector.gameObject.SetActive(true);
-		yield return new WaitForSeconds(asteroidProjectorTime);
-		asteroidProjector.gameObject.SetActive(false);
+	private IEnumerator RemoveImpactIcon(GameObject go){
+		yield return new WaitForSeconds(3.5f);
+		Destroy(go);
 	}
 
 	private Vector3 RandomPointInBox(Vector3 center, Vector3 size) {

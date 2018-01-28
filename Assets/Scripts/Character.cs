@@ -5,6 +5,8 @@ using XInputDotNetPure;
 
 [RequireComponent(typeof(ParticleSystem))]
 public class Character : MonoBehaviour {
+    public AudioSource motorAudio;
+
     [HideInInspector]
     public ParticleSystem correctNoteFeedback;
 
@@ -59,6 +61,7 @@ public class Character : MonoBehaviour {
 	void Start () {
         correctNoteFeedback = GetComponent<ParticleSystem>();
         body = GetComponent<Rigidbody>();
+        motorAudio = GetComponent<AudioSource>();
 
         roverType = (RoverType) Random.Range(0, (int)RoverType.Count);
         visuals[(int)roverType].gameObject.SetActive(true);
@@ -85,6 +88,10 @@ public class Character : MonoBehaviour {
             }
         }
 
+        float mag = Vector2.SqrMagnitude(steering);
+        motorAudio.volume = Mathf.Clamp(mag, 0, 1);
+        motorAudio.pitch = Mathf.Clamp(mag, 0.8f, 1f);
+
         bool noInput = steering == Vector2.zero;
         steering = steering.normalized;
 
@@ -98,11 +105,9 @@ public class Character : MonoBehaviour {
         float dot = Vector3.Dot(steering3, transform.right);
 
         if(forwardDot < settings.reverseMaxDot){
-            float mag = steering3.magnitude;
             steering3 += Mathf.Sign(dot) * transform.right * settings.reverseOffset;
             steering3 = steering3.normalized * mag;
         }
-
 
         dot = Vector3.Dot(steering3, transform.right);
         if(Mathf.Abs(dot) < settings.innerOuterDeadzone) dot = 0;

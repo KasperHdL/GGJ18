@@ -12,14 +12,24 @@ public class Team : MonoBehaviour {
 	public Pattern pattern;
 	public Beam beam;
 
+	public AnimationCurve pushForceCurve;
+	public float forceMultiplier;
+
 	public float patternIntervals = 2.0f;
 
+<<<<<<< HEAD
 	public Collider beamCollider;
+=======
+	public float noDisruptDelay;
+	private float beamStartedTime = -1;
+>>>>>>> master
 
 	private bool hasSignal;
 	private bool left;
 	private bool right;
 	private bool playerFound;
+
+
 
 	void Start()
 	{
@@ -64,7 +74,17 @@ public class Team : MonoBehaviour {
 			
 			if(playerDifference.magnitude < beam.minDist)
 			{
+<<<<<<< HEAD
 				FAIL();
+=======
+				if(!hit.transform.tag.Equals("Team"+teamID) || (hit.distance < beam.minDist && beamStartedTime + noDisruptDelay < Time.time))
+				{
+					FAIL();
+					if(hit.transform.tag.Equals("Asteroid")){
+						hit.transform.GetComponent<Asteroid>().Explode();
+					}
+				}
+>>>>>>> master
 			}
 		}
 	}
@@ -157,6 +177,8 @@ public class Team : MonoBehaviour {
 		PlayerSwap(0);
 
 		pattern.ResetIntensity();
+
+		beamStartedTime = -1;
 	}
 
 	public void PlayerSwap(int threshhold)
@@ -190,6 +212,21 @@ public class Team : MonoBehaviour {
 			beam.enable();
 			hasSignal = false;
 		}
+
+		//Push everyone
+		Vector3 recPos = receiver.transform.position;
+		Character[] chars = GameHandler.instance.playerJoin.characters;
+		for(int i = 0; i < chars.Length;i++){
+			if(chars[i].gameObject != receiver.gameObject){
+				Vector3 delta = chars[i].transform.position - recPos;
+
+				float force = pushForceCurve.Evaluate(delta.magnitude) * forceMultiplier;
+				chars[i].body.AddForce(delta.normalized * force, ForceMode.Impulse);
+			}
+		}
+
+		beamStartedTime = Time.time;
+
 	}
 
 	public void SendInputToPattern(InputValues inputValue)

@@ -16,7 +16,7 @@ public class ScoreHandler : MonoBehaviour {
 	private bool team0HasBeam;
 	private bool team1HasBeam;
 
-	private GameOverArgs winnerArguments;
+	private GameOverArgs winnerArguments = new GameOverArgs();
 
 	// Use this for initialization
 	void Start () 
