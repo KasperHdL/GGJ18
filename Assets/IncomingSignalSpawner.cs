@@ -64,7 +64,7 @@ public class IncomingSignalSpawner : MonoBehaviour {
 	}
 
 	private IEnumerator RemoveImpactIcon(GameObject go){
-		yield return new WaitForSeconds(3.5f);
+		yield return new WaitForSeconds(6);
 		Destroy(go);
 	}
 

@@ -176,7 +176,7 @@ public class Character : MonoBehaviour {
 
         float upDot = Vector3.Dot(transform.up, Vector3.up);
 
-		if(upDot < 0.75 && wheelsOffGround > 3 && body.velocity.magnitude < settings.flipMinVelocity){
+		if(upDot < 0.75 && wheelsOffGround > 1 && body.velocity.magnitude < settings.flipMinVelocity){
             if(startFlipAction == -1){
                 startFlipAction = Time.time + settings.flipDelay;
             }
@@ -189,6 +189,11 @@ public class Character : MonoBehaviour {
             }
         }else{
             startFlipAction = -1;
+        }
+
+        if(state.Buttons.Back == ButtonState.Pressed && prevState.Buttons.Back == ButtonState.Released){
+            transform.rotation = Quaternion.Euler(0,0,0);
+            transform.position += Vector3.up;
         }
 
         //Visual Wheels

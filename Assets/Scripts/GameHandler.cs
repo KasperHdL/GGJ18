@@ -41,6 +41,7 @@ public class GameHandler : MonoBehaviour {
 		countdownText.enabled = false;
 	}
 
+
 	public void FixedUpdate(){
 		if(gameIsStarted) return;
 

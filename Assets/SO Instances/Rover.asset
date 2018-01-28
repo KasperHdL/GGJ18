@@ -74,4 +74,4 @@ MonoBehaviour:
     m_RotationOrder: 0
   onGroundCheckDistance: 1.5
   flipMinVelocity: 2
-  flipDelay: 1
+  flipDelay: 3
