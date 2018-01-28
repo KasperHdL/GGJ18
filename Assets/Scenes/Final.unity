@@ -962,6 +962,37 @@ MonoBehaviour:
   sender: {fileID: 0}
   pattern: {fileID: 1174389580}
   beam: {fileID: 1174389579}
+  pushForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 15.058696
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 20.00262
+      value: 0.5
+      inSlope: -0.088214874
+      outSlope: -0.088214874
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 30
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  forceMultiplier: 500
   patternIntervals: 2
 --- !u!4 &1174389582
 Transform:
@@ -1377,6 +1408,37 @@ MonoBehaviour:
   sender: {fileID: 0}
   pattern: {fileID: 1541470976}
   beam: {fileID: 1541470975}
+  pushForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 15.058696
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 20.00262
+      value: 0.5
+      inSlope: -0.088214874
+      outSlope: -0.088214874
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 30
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  forceMultiplier: 500
   patternIntervals: 2
 --- !u!4 &1541470978
 Transform:
