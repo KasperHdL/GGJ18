@@ -49,7 +49,10 @@ public class Team : MonoBehaviour {
 		if (!beam.disrupted)
 		{
 			RaycastHit hit;
-			if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
+			Vector3 playerDifference = (receiver.transform.position - sender.transform.position);
+			Vector3 centerpoint = sender.transform.position + playerDifference/2;
+			//if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
+			if (Physics.BoxCast(centerpoint, new Vector3(1.0f, 50.0f, Vector3.Magnitude(playerDifference)/2), Vector3.Normalize(playerDifference), out hit, Quaternion.identity, 100.0f, LayerMask.GetMask("Hitables")))
 			{
 				if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
 				{
