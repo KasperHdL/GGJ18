@@ -9,6 +9,7 @@ TagManager:
   - SignalZone
   - Ground
   - Asteroid
+  - AsteroidImpacted
   layers:
   - Default
   - TransparentFX

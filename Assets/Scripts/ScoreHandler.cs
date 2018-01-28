@@ -113,11 +113,13 @@ public class ScoreHandler : MonoBehaviour {
 		if (patternArguments.teamID == 0)
 		{
 			team0HasBeam = true;
+			team0Score += (timeForWin / scoreIncrements);
 		}
 
 		if (patternArguments.teamID == 1)
 		{
 			team1HasBeam = true;
+			team1Score += (timeForWin / scoreIncrements);
 		}
 	}
 

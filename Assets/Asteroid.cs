@@ -43,7 +43,17 @@ public class Asteroid : MonoBehaviour {
         impactEffect.Play();
         rb.isKinematic = true;
         AudioSource.PlayClipAtPoint(impactSounds[Random.Range(0, impactSounds.Length)], transform.position);      
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-asteroidSinkFactor, this.transform.position.z);
+
+        RaycastHit hit;
+
+		if(Physics.Raycast(transform.position,Vector3.down,out hit,Mathf.Infinity,LayerMask.GetMask("Ground"))){
+            this.transform.position = hit.point;
+        }else{
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-asteroidSinkFactor, this.transform.position.z);
+        }
+
+        gameObject.tag = "AsteroidImpacted";
+
 
         hasImpacted = true;
 
@@ -76,7 +86,8 @@ public class Asteroid : MonoBehaviour {
         if(other.transform.tag.Equals("Ground")){
             Impact();
         }
-        if(other.transform.tag.Equals("Asteroid")){
+        if(other.transform.tag.Equals("Asteroid") ||
+        other.transform.tag.Equals("AsteroidImpacted")){
             this.Explode();
             other.gameObject.GetComponent<Asteroid>().Explode();
         }

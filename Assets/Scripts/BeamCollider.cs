@@ -7,7 +7,7 @@ public class BeamCollider : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.transform.tag.Equals("Asteroid")){
+		if(other.transform.tag.Equals("AsteroidImpacted")){
 			team.FAIL();
 			other.transform.GetComponent<Asteroid>().Explode();
 		}
