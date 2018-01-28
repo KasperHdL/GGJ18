@@ -22,6 +22,7 @@ public class Pattern : MonoBehaviour {
 
 	private bool waitingForValue;
 	private bool correctInput;
+	private bool stopPatternPlayback = false;
 	
 	private RumbleArgs rumbleArgument = new RumbleArgs();
 	private PatternArgs patternArgument = new PatternArgs();
@@ -31,9 +32,16 @@ public class Pattern : MonoBehaviour {
 		GameEventHandler.Subscribe(GameEvent.SignalExit,StopPatternPlayback);
 		GameEventHandler.Subscribe(GameEvent.SignalEnter,StartPatternPlayback);
 	}
-	bool stopPatternPlayback = false;
+
 	private void StopPatternPlayback(GameEventArgs argument){
+		SignalArgument signal = (SignalArgument) argument;
+		if(signal.teamID != teamID)
+		{
+			return;
+		}
+
 		stopPatternPlayback = true;
+		StopAllCoroutines();
 	}
 	private void StartPatternPlayback(GameEventArgs argument){
 		stopPatternPlayback = false;
@@ -118,39 +126,32 @@ public class Pattern : MonoBehaviour {
 
 	public void StartPlayPatternCoroutine()
 	{
+		StopAllCoroutines();
 		StartCoroutine(PlayPattern());
 	}
 
 	public IEnumerator PlayPattern()
 	{
-		Debug.Log("Pattern Coroutine Started");
 		isPlayingPattern = true;
 		waitingForValue = true;
-		
-		int currentPositionInPattern = 0;
 
-		while(currentPositionInPattern < patternSize)
-		{
-			if(stopPatternPlayback){
-				waitingForValue = false;
-				break;
-			}
-
-			// SEND VIBRATION INFORMATION
-			CallVibration(currentPattern[currentPositionInPattern]);
+		while(true){
 			
-			yield return new WaitForSeconds(timeBetweenNotes);
+			int currentPositionInPattern = 0;
 
-			// PREPARE FOR NEXT NUMBER
-			currentPositionInPattern ++;
-			correctInput = false;
+			while(currentPositionInPattern < patternSize)
+			{
+				// SEND VIBRATION INFORMATION
+				CallVibration(currentPattern[currentPositionInPattern]);
+				
+				yield return new WaitForSeconds(timeBetweenNotes);
 
-			if(stopPatternPlayback){
-				waitingForValue = false;
-				break;
+				// PREPARE FOR NEXT NUMBER
+				currentPositionInPattern ++;
+				correctInput = false;
 			}
-		}
 
+		}
 		isPlayingPattern = false;
 	}
 }
