@@ -144,7 +144,6 @@ public class Team : MonoBehaviour {
 
 	public void PatternFailure(GameEventArgs argument)
 	{
-		Debug.Log("Pattern Failed");
 
 		PatternArgs patternArgument = (PatternArgs)argument;
 		if (patternArgument.teamID != teamID)
@@ -179,8 +178,6 @@ public class Team : MonoBehaviour {
 
 	public void PatternCompletion(GameEventArgs argument)
 	{
-		Debug.Log("Pattern Completed");
-
 		PatternArgs patternArgument = (PatternArgs)argument;
 		if (patternArgument.teamID != teamID)
 		{
