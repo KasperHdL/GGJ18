@@ -928,8 +928,8 @@ MonoBehaviour:
   maxSizeDist: 30
   disrupted: 0
   lineMaterial: {fileID: 2100000, guid: 87798f0a40b4e9c47b87b58098e62412, type: 2}
-  distruptColor: {r: 1, g: 0, b: 0, a: 1}
-  enabledColor: {r: 0.15862082, g: 1, b: 0, a: 1}
+  distruptColor: {r: 0, g: 1, b: 0.90196085, a: 1}
+  enabledColor: {r: 0, g: 0.92549026, b: 0.83921576, a: 1}
 --- !u!114 &1174389580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -962,7 +962,39 @@ MonoBehaviour:
   sender: {fileID: 0}
   pattern: {fileID: 1174389580}
   beam: {fileID: 1174389579}
+  pushForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 15.058696
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 20.00262
+      value: 0.5
+      inSlope: -0.088214874
+      outSlope: -0.088214874
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 30
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  forceMultiplier: 50
   patternIntervals: 2
+  noDisruptDelay: 1
 --- !u!4 &1174389582
 Transform:
   m_ObjectHideFlags: 0
@@ -1320,7 +1352,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
@@ -1343,8 +1375,8 @@ MonoBehaviour:
   maxSizeDist: 30
   disrupted: 0
   lineMaterial: {fileID: 2100000, guid: 87798f0a40b4e9c47b87b58098e62412, type: 2}
-  distruptColor: {r: 1, g: 0, b: 0, a: 1}
-  enabledColor: {r: 0.15862082, g: 1, b: 0, a: 1}
+  distruptColor: {r: 0, g: 1, b: 0.90196085, a: 1}
+  enabledColor: {r: 0, g: 0.92549026, b: 0.83921576, a: 1}
 --- !u!114 &1541470976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1377,7 +1409,39 @@ MonoBehaviour:
   sender: {fileID: 0}
   pattern: {fileID: 1541470976}
   beam: {fileID: 1541470975}
+  pushForceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 15.058696
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 20.00262
+      value: 0.5
+      inSlope: -0.088214874
+      outSlope: -0.088214874
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 30
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  forceMultiplier: 50
   patternIntervals: 2
+  noDisruptDelay: 1
 --- !u!4 &1541470978
 Transform:
   m_ObjectHideFlags: 0
