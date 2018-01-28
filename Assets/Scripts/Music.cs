@@ -8,6 +8,16 @@ public class Music : MonoBehaviour
 
     private AudioSource ambienceSource, accentSource;
 
+    public static Music instance = null;
+    void Awake(){
+        if(instance != null){
+            Destroy(gameObject);
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Use this for initialization
     void Start()
     {
