@@ -24,7 +24,9 @@ public class Asteroid : MonoBehaviour {
         meshFilter.mesh = meshes[rnd];
         meshCollider.sharedMesh = meshes[rnd];
         rb = GetComponent<Rigidbody>();
-	}
+
+        GetComponent<AudioSource>().clip = impactSounds[Random.Range(0, impactSounds.Length)];
+    }
 
     public void Explode(){
         StartCoroutine(Exploder());
@@ -42,7 +44,8 @@ public class Asteroid : MonoBehaviour {
         trailEffect.gameObject.SetActive(false);
         impactEffect.Play();
         rb.isKinematic = true;
-        AudioSource.PlayClipAtPoint(impactSounds[Random.Range(0, impactSounds.Length)], transform.position);      
+
+        GetComponent<AudioSource>().Play();
 
         RaycastHit hit;
 

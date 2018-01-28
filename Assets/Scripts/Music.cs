@@ -49,7 +49,7 @@ public class Music : MonoBehaviour
 
     IEnumerator AccentVolume(bool volumeUp)
     {
-        for (float i = 0; i < 1; i += Time.deltaTime / 10)
+        for (float i = 0; i < 1; i += Time.deltaTime / 5)
         {
             accentSource.volume = (volumeUp ? i : 1 - i) * 0.25f;
 
