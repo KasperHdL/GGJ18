@@ -132,24 +132,26 @@ public class Pattern : MonoBehaviour {
 
 	public IEnumerator PlayPattern()
 	{
-		Debug.Log("Pattern Coroutine Started");
 		isPlayingPattern = true;
 		waitingForValue = true;
-		
-		int currentPositionInPattern = 0;
 
-		while(currentPositionInPattern < patternSize)
-		{
-			// SEND VIBRATION INFORMATION
-			CallVibration(currentPattern[currentPositionInPattern]);
+		while(true){
 			
-			yield return new WaitForSeconds(timeBetweenNotes);
+			int currentPositionInPattern = 0;
 
-			// PREPARE FOR NEXT NUMBER
-			currentPositionInPattern ++;
-			correctInput = false;
+			while(currentPositionInPattern < patternSize)
+			{
+				// SEND VIBRATION INFORMATION
+				CallVibration(currentPattern[currentPositionInPattern]);
+				
+				yield return new WaitForSeconds(timeBetweenNotes);
+
+				// PREPARE FOR NEXT NUMBER
+				currentPositionInPattern ++;
+				correctInput = false;
+			}
+
 		}
-
 		isPlayingPattern = false;
 	}
 }
