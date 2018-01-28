@@ -54,6 +54,9 @@ public class Team : MonoBehaviour {
 				if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
 				{
 					FAIL();
+					if(hit.transform.tag.Equals("Asteroid")){
+						hit.transform.GetComponent<Asteroid>().Explode();
+					}
 				}
 			}
 		}

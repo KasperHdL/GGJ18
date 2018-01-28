@@ -7,6 +7,8 @@ TagManager:
   - Team0
   - Team1
   - SignalZone
+  - Ground
+  - Asteroid
   layers:
   - Default
   - TransparentFX
