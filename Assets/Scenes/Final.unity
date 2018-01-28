@@ -1741,22 +1741,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 23456797093285342, guid: 0265e00b654c7d54e87f6f5c11c30dbb,
+    - target: {fileID: 114255097930034778, guid: 0265e00b654c7d54e87f6f5c11c30dbb,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831076361139564, guid: 0265e00b654c7d54e87f6f5c11c30dbb, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 69.86554
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831076361139564, guid: 0265e00b654c7d54e87f6f5c11c30dbb, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831076361139564, guid: 0265e00b654c7d54e87f6f5c11c30dbb, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 69.86555
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0265e00b654c7d54e87f6f5c11c30dbb, type: 2}

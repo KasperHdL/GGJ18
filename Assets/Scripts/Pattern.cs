@@ -94,7 +94,6 @@ public class Pattern : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log("Index: " + currentCheckPosition + " List Size: " + currentPattern.Count);
 		correctInput = currentPattern[currentCheckPosition] == input;
 		
 		if (correctInput)
