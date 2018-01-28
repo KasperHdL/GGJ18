@@ -104,8 +104,8 @@ public class GameHandler : MonoBehaviour {
 			teams[i].gameObject.SetActive(true);
 			teams[i].teamID = i;
 		}
-
 		GameEventHandler.TriggerEvent(GameEvent.GameStarted);
+
 	}
 
 }

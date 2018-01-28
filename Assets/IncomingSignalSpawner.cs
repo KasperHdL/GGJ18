@@ -19,7 +19,6 @@ public class IncomingSignalSpawner : MonoBehaviour {
 		GameObject temp = Instantiate(incomingSignalPrefab,RandomPointInBox(this.transform.position,this.transform.localScale),Quaternion.identity);
 		RaycastHit hit;
 		if(Physics.Raycast(temp.transform.position,Vector3.down,out hit,Mathf.Infinity,LayerMask.GetMask("Ground"))){
-			Debug.Log(hit.transform.name);
 			temp.transform.position = new Vector3(temp.transform.position.x,hit.point.y+yOffset,temp.transform.position.z);
 		}
 	}
