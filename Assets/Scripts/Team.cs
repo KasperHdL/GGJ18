@@ -80,6 +80,9 @@ public class Team : MonoBehaviour {
 		if (signalArgument.teamID == teamID)
 		{
 			hasSignal = false;
+			
+			pattern.StopPatternCoroutine();
+			StopAllCoroutines();
 		}
 	}
 
@@ -154,6 +157,8 @@ public class Team : MonoBehaviour {
 	public void FAIL(){
 		GameEventHandler.TriggerEvent(GameEvent.BeamDisrupted);
 		beam.distrupt();
+
+		beamCollider.enabled = false;
 
 		PlayerSwap(0);
 

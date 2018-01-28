@@ -128,6 +128,14 @@ public class Pattern : MonoBehaviour {
 		StopAllCoroutines();
 		StartCoroutine(PlayPattern());
 	}
+	public void StopPatternCoroutine()
+	{
+		waitingForValue = false;
+		isPlayingPattern = false;
+		correctInput = false;
+
+		StopAllCoroutines();
+	}
 
 	public IEnumerator PlayPattern()
 	{
