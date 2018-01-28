@@ -22,7 +22,7 @@ public class Team : MonoBehaviour {
 
 	public float patternIntervals = 2.0f;
 
-	private bool hasSignal;
+	public bool hasSignal;
 	private bool left;
 	private bool right;
 	private bool playerFound;
@@ -99,6 +99,7 @@ public class Team : MonoBehaviour {
 
 		if (playerFound)
 		{
+			StopAllCoroutines();
 			StartCoroutine(RepeatedPlayback());
 		}
 	}

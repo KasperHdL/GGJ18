@@ -41,7 +41,6 @@ public class Pattern : MonoBehaviour {
 		}
 
 		stopPatternPlayback = true;
-		StopAllCoroutines();
 	}
 	private void StartPatternPlayback(GameEventArgs argument){
 		stopPatternPlayback = false;
@@ -135,23 +134,21 @@ public class Pattern : MonoBehaviour {
 		isPlayingPattern = true;
 		waitingForValue = true;
 
-		while(true){
 			
-			int currentPositionInPattern = 0;
+		int currentPositionInPattern = 0;
 
-			while(currentPositionInPattern < patternSize)
-			{
-				// SEND VIBRATION INFORMATION
-				CallVibration(currentPattern[currentPositionInPattern]);
-				
-				yield return new WaitForSeconds(timeBetweenNotes);
+		while(currentPositionInPattern < patternSize)
+		{
+			// SEND VIBRATION INFORMATION
+			CallVibration(currentPattern[currentPositionInPattern]);
+			
+			yield return new WaitForSeconds(timeBetweenNotes);
 
-				// PREPARE FOR NEXT NUMBER
-				currentPositionInPattern ++;
-				correctInput = false;
-			}
-
+			// PREPARE FOR NEXT NUMBER
+			currentPositionInPattern ++;
+			correctInput = false;
 		}
+
 		isPlayingPattern = false;
 	}
 }
