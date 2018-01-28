@@ -6,6 +6,8 @@ public class Asteroid : MonoBehaviour {
     public Mesh[] meshes;
 
     public ParticleSystem ps; 
+    private Rigidbody rb;
+    public float asteroidSinkFactor;
 
 	
 	void Start () {
@@ -15,11 +17,36 @@ public class Asteroid : MonoBehaviour {
         int rnd = Random.Range(0, meshes.Length);
         meshFilter.mesh = meshes[rnd];
         meshCollider.sharedMesh = meshes[rnd];
+        rb = GetComponent<Rigidbody>();
 	}
-	
-	
-	void Update ()
+
+    public void Explode(){
+        //explode particle and stuff
+
+        Destroy(this.gameObject);
+    }
+
+    public void Impact(){
+        //Impact particle system and stuff
+
+        ps.gameObject.SetActive(false);
+        rb.isKinematic = true;
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-asteroidSinkFactor, this.transform.position.z);
+    }
+
+    /// <summary>
+    /// OnCollisionEnter is called when this collider/rigidbody has begun
+    /// touching another rigidbody/collider.
+    /// </summary>
+    /// <param name="other">The Collision data associated with this collision.</param>
+    void OnCollisionEnter(Collision other)
     {
-		
-	}
+        if(other.transform.tag.Equals("Ground")){
+            Impact();
+        }
+        if(other.transform.tag.Equals("Asteroid")){
+            this.Explode();
+            other.gameObject.GetComponent<Asteroid>().Explode();
+        }
+    }
 }
