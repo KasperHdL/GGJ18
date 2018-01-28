@@ -857,7 +857,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -905,7 +905,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
@@ -923,6 +923,9 @@ MonoBehaviour:
   player1: {fileID: 0}
   player2: {fileID: 0}
   minDist: 10
+  minSize: 0.1
+  maxSize: 1.5
+  maxSizeDist: 30
   disrupted: 0
   lineMaterial: {fileID: 2100000, guid: 87798f0a40b4e9c47b87b58098e62412, type: 2}
   distruptColor: {r: 1, g: 0, b: 0, a: 1}
@@ -1031,6 +1034,10 @@ Prefab:
     - target: {fileID: 100000, guid: 482e0a3e27abc1f4e8d0b8efebc1a5b3, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 482e0a3e27abc1f4e8d0b8efebc1a5b3, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 482e0a3e27abc1f4e8d0b8efebc1a5b3, type: 3}
@@ -1331,6 +1338,9 @@ MonoBehaviour:
   player1: {fileID: 0}
   player2: {fileID: 0}
   minDist: 10
+  minSize: 0.1
+  maxSize: 1.5
+  maxSizeDist: 30
   disrupted: 0
   lineMaterial: {fileID: 2100000, guid: 87798f0a40b4e9c47b87b58098e62412, type: 2}
   distruptColor: {r: 1, g: 0, b: 0, a: 1}

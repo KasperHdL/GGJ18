@@ -10,6 +10,11 @@ public class Beam : MonoBehaviour {
 	public GameObject player2;
 	
 	public float minDist;
+
+	public float minSize;
+	public float maxSize;
+	public float maxSizeDist;
+
 	public bool disrupted;
 	
 	private Color currentColor;
@@ -36,6 +41,13 @@ public class Beam : MonoBehaviour {
 		dist = Vector3.Distance(player1.transform.position,player2.transform.position);
 
 		currentColor = Color.Lerp(enabledColor,distruptColor,minDist/dist);
+
+		float w = Mathf.Lerp(minSize, maxSize, (dist - minDist) / (maxSizeDist - minDist));
+
+		line.startWidth = w;
+		line.endWidth = w;
+
+
 
 		Debug.DrawLine(player1.transform.position,player2.transform.position,currentColor,Time.deltaTime);
 		line.SetPosition(0,player1.transform.position);

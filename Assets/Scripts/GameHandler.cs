@@ -89,6 +89,8 @@ public class GameHandler : MonoBehaviour {
 
 			int index = (int) characters[i].roverType;
 
+			characters[i].gameObject.tag  = (index == 0 ? "Team0" : "Team1");
+
 			if(teams[index].receiver == null){
 				teams[index].receiver = characters[i];
 				continue;

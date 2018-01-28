@@ -24,7 +24,11 @@ public class Team : MonoBehaviour {
 
 		if(receiver == null || sender == null){
 			gameObject.SetActive(false);
+			return;
 		}
+
+		beam.player1 = receiver.gameObject;
+		beam.player2 = sender.gameObject;
 
 		GameEventHandler.Subscribe(GameEvent.Rumble, SendVibration);
 		GameEventHandler.Subscribe(GameEvent.PatternSuccess, PatternCompletion);
