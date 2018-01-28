@@ -17,3 +17,7 @@ public class PatternArgs : GameEventArgs{
 public class SignalArgument : GameEventArgs{
     public int playerID;
 }
+
+public class GameOverArgs : GameEventArgs{
+    public int teamID;
+}
