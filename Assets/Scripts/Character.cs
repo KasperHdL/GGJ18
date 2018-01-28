@@ -221,6 +221,7 @@ public class Character : MonoBehaviour {
     {
         if (other.tag.Equals("SignalZone"))
         {
+            signalArgument.teamID = (int) roverType;
             GameEventHandler.TriggerEvent(GameEvent.SignalEnter, signalArgument);
         }
     }
@@ -229,6 +230,7 @@ public class Character : MonoBehaviour {
     {
         if (other.tag.Equals("SignalZone"))
         {
+            signalArgument.teamID = (int) roverType;
             GameEventHandler.TriggerEvent(GameEvent.SignalExit, signalArgument);
         }
     }

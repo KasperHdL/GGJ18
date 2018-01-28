@@ -14,6 +14,8 @@ public class Team : MonoBehaviour {
 
 	public float patternIntervals = 2.0f;
 
+	public Collider beamCollider;
+
 	private bool hasSignal;
 	private bool left;
 	private bool right;
@@ -55,16 +57,14 @@ public class Team : MonoBehaviour {
 			RaycastHit hit;
 			Vector3 playerDifference = (receiver.transform.position - sender.transform.position);
 			Vector3 centerpoint = sender.transform.position + playerDifference/2;
-			//if(Physics.Linecast(receiver.transform.position, sender.transform.position, out hit,LayerMask.GetMask("Hitables")))
-			if (Physics.BoxCast(centerpoint, new Vector3(1.0f, 50.0f, Vector3.Magnitude(playerDifference)/2), Vector3.Normalize(playerDifference), out hit, Quaternion.identity, 100.0f, LayerMask.GetMask("Hitables")))
+
+			beamCollider.transform.position = centerpoint;
+			beamCollider.transform.localScale = new Vector3(1,50,playerDifference.magnitude);
+			beamCollider.transform.rotation = Quaternion.LookRotation(playerDifference);
+			
+			if(playerDifference.magnitude < beam.minDist)
 			{
-				if(!hit.transform.tag.Equals("Team"+teamID) || hit.distance < beam.minDist)
-				{
-					FAIL();
-					if(hit.transform.tag.Equals("Asteroid")){
-						hit.transform.GetComponent<Asteroid>().Explode();
-					}
-				}
+				FAIL();
 			}
 		}
 	}
@@ -73,7 +73,7 @@ public class Team : MonoBehaviour {
 	{
 		SignalArgument signalArgument = (SignalArgument)arguments;
 
-		if (!playerFound)
+		if (signalArgument.teamID != teamID)
 		{
 			return;
 		}
@@ -97,6 +97,7 @@ public class Team : MonoBehaviour {
 
 		if (playerFound)
 		{
+			StopAllCoroutines();
 			StartCoroutine(RepeatedPlayback());
 		}
 	}
@@ -151,6 +152,8 @@ public class Team : MonoBehaviour {
 		GameEventHandler.TriggerEvent(GameEvent.BeamDisrupted);
 		beam.distrupt();
 
+		beamCollider.enabled = false;
+
 		PlayerSwap(0);
 
 		pattern.ResetIntensity();
@@ -177,6 +180,10 @@ public class Team : MonoBehaviour {
 		{
 			return;
 		}
+		beamCollider.enabled = true;
+
+
+			StopAllCoroutines();
 
 		if (beam.disrupted)
 		{
