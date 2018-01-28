@@ -40,7 +40,7 @@ public class Beam : MonoBehaviour {
 		Debug.DrawLine(player1.transform.position,player2.transform.position,currentColor,Time.deltaTime);
 		line.SetPosition(0,player1.transform.position);
 		line.SetPosition(1,player2.transform.position);
-		lineMaterial.SetColor("_Color",currentColor);
+		lineMaterial.SetColor("_EmissionColor",currentColor);
 	}
 	private float Map(float from, float to, float from2, float to2, float value){
         if(value <= from2){
