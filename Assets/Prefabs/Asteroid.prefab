@@ -194,6 +194,9 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 77cc335f03e098843bfa8cad4364a8b1, type: 3}
   - {fileID: 4300000, guid: b28267b3f54e1524aa9c29b40ab43bd0, type: 3}
   - {fileID: 4300000, guid: 52779af354fb84244848209f3c2e8955, type: 3}
+  impactSounds:
+  - {fileID: 8300000, guid: 176f5720ce589e94799b081c83ac150a, type: 3}
+  - {fileID: 8300000, guid: 282915ecde337e24c941a434d225e4c1, type: 3}
   trailEffect: {fileID: 198009110686159428}
   impactEffect: {fileID: 198415298240746298}
   asteroidSinkFactor: 0

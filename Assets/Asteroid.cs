@@ -5,6 +5,8 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour {
     public Mesh[] meshes;
 
+    public AudioClip[] impactSounds;
+
     public ParticleSystem trailEffect, impactEffect; 
     private Rigidbody rb;
     public float asteroidSinkFactor;
@@ -32,6 +34,7 @@ public class Asteroid : MonoBehaviour {
         trailEffect.gameObject.SetActive(false);
         impactEffect.Play();
         rb.isKinematic = true;
+        AudioSource.PlayClipAtPoint(impactSounds[Random.Range(0, impactSounds.Length)], transform.position);      
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-asteroidSinkFactor, this.transform.position.z);
     }
 
