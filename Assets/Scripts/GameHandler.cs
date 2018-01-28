@@ -33,7 +33,6 @@ public class GameHandler : MonoBehaviour {
 			return;
 		}
 		instance = this;
-		DontDestroyOnLoad(gameObject);
 	}
 
 	public void Start(){
@@ -71,6 +70,9 @@ public class GameHandler : MonoBehaviour {
 		}
 	}
 
+	public void UpdatePlayerForTeam(Character.RoverType type, int numPlayers){
+		numPlayersOnTeam[(int) type] = numPlayers;
+	}
 	public void PlayerJoinedTeam(Character.RoverType type){
 		numPlayersOnTeam[(int) type]++;
 	}
